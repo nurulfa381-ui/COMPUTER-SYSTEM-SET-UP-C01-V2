@@ -1,114 +1,141 @@
-const KP13_STATE = {
-  matching: false,
-  sequence: false,
-  scenarios: false,
-  simulation: false,
-  diagnostic: false
+const KT13_CONFIG = {
+  missionId: 13,
+  ktCode: "KT13",
+  passMark: 60
 };
 
-const storageNotes = {
-  permanent: {
-    title: "Penyimpanan Kekal",
-    text: "HDD, SSD dan media optik menyimpan data walaupun komputer dimatikan. Juruteknik perlu memastikan data dapat dibaca, ditulis dan dilindungi."
+const questionBank = [
+  {
+    id: "q1",
+    text: "Apakah kelebihan utama SSD berbanding HDD?",
+    correct: "Tiada bahagian bergerak dan akses data lebih pantas",
+    options: [
+      "Tiada bahagian bergerak dan akses data lebih pantas",
+      "Memerlukan lebih banyak kuasa dan menghasilkan bunyi",
+      "Hanya boleh digunakan untuk backup",
+      "Tidak memerlukan sistem fail"
+    ]
   },
-  boot: {
-    title: "Pemacu Sistem",
-    text: "Pemacu sistem mengandungi boot loader, sistem pengoperasian, aplikasi dan fail konfigurasi. Kegagalan pemacu sistem boleh menyebabkan komputer gagal boot."
+  {
+    id: "q2",
+    text: "Apakah fungsi kabel SATA data?",
+    correct: "Menghantar data antara pemacu dan motherboard",
+    options: [
+      "Membekalkan kuasa terus kepada CPU",
+      "Menghantar data antara pemacu dan motherboard",
+      "Mengawal kelajuan kipas casing",
+      "Menghubungkan monitor ke GPU"
+    ]
   },
-  backup: {
-    title: "Sandaran Data",
-    text: "Backup ialah salinan data pada lokasi lain. Gunakan prinsip 3-2-1: tiga salinan, dua jenis media dan satu salinan di lokasi berbeza."
+  {
+    id: "q3",
+    text: "Bilakah GPT lebih sesuai digunakan?",
+    correct: "Apabila menggunakan UEFI dan pemacu berkapasiti besar",
+    options: [
+      "Apabila menggunakan pemacu floppy",
+      "Apabila hanya ada satu fail kecil",
+      "Apabila menggunakan UEFI dan pemacu berkapasiti besar",
+      "Apabila komputer tidak mempunyai sistem pengoperasian"
+    ]
   },
-  sharing: {
-    title: "Perkongsian Data",
-    text: "Pemacu boleh dikongsi melalui rangkaian. Kebenaran akses, kuota dan keselamatan pengguna perlu dikonfigurasi dengan betul."
+  {
+    id: "q4",
+    text: "Sistem fail manakah paling sesuai untuk pemacu dalaman Windows?",
+    correct: "NTFS",
+    options: [
+      "FAT12",
+      "NTFS",
+      "ISO 9660",
+      "RAW"
+    ]
+  },
+  {
+    id: "q5",
+    text: "Apakah ciri utama RAID 1?",
+    correct: "Data yang sama disalin ke dua pemacu",
+    options: [
+      "Data yang sama disalin ke dua pemacu",
+      "Semua pemacu digabung tanpa perlindungan",
+      "Hanya satu pemacu digunakan",
+      "Data dipadam secara automatik"
+    ]
+  },
+  {
+    id: "q6",
+    text: "Apakah langkah pertama sebelum memasang pemacu baharu?",
+    correct: "Semak keserasian pemacu, slot dan kabel",
+    options: [
+      "Format pemacu sebelum memasangnya",
+      "Semak keserasian pemacu, slot dan kabel",
+      "Padam semua partisi lama komputer",
+      "Tukar kata laluan pengguna"
+    ]
+  },
+  {
+    id: "q7",
+    text: "Apakah fungsi SMART?",
+    correct: "Memantau kesihatan dan tanda awal kegagalan pemacu",
+    options: [
+      "Meningkatkan kapasiti fizikal pemacu",
+      "Menukar SATA kepada USB",
+      "Memantau kesihatan dan tanda awal kegagalan pemacu",
+      "Mengawal resolusi monitor"
+    ]
+  },
+  {
+    id: "q8",
+    text: "Pemacu 2 TB digunakan antara Windows dan macOS serta menyimpan video besar. Sistem fail yang sesuai ialah:",
+    correct: "exFAT",
+    options: [
+      "FAT16",
+      "exFAT",
+      "RAW",
+      "EXT2"
+    ]
+  },
+  {
+    id: "q9",
+    text: "Apakah tindakan pertama jika SSD SATA tidak dikesan?",
+    correct: "Semak kabel SATA data dan kuasa",
+    options: [
+      "Tukar keyboard",
+      "Pasang semula driver printer",
+      "Semak kabel SATA data dan kuasa",
+      "Padam akaun pengguna"
+    ]
+  },
+  {
+    id: "q10",
+    text: "Pernyataan manakah betul tentang RAID dan backup?",
+    correct: "RAID meningkatkan ketersediaan tetapi backup masih diperlukan",
+    options: [
+      "RAID menghapuskan keperluan backup",
+      "Backup hanya diperlukan untuk HDD",
+      "RAID meningkatkan ketersediaan tetapi backup masih diperlukan",
+      "RAID hanya digunakan pada pemacu USB"
+    ]
   }
-};
-
-const connectorNotes = {
-  "sata-data": "Kabel SATA data mempunyai penyambung berbentuk L. Sambungkan satu hujung ke pemacu dan satu lagi ke port SATA motherboard.",
-  "sata-power": "Kabel SATA power biasanya mempunyai 15 pin dan datang daripada PSU. Jangan paksa penyambung jika orientasi tidak betul.",
-  "m2": "Slot M.2 mungkin menyokong SATA, NVMe atau kedua-duanya. Semak manual motherboard, panjang modul dan key type.",
-  "usb": "Pemacu USB sesuai untuk pemindahan data dan backup. Gunakan eject sebelum mencabut untuk mengurangkan risiko kerosakan sistem fail."
-};
-
-const fsNotes = {
-  ntfs: "NTFS sesuai untuk Windows, menyokong fail besar, permission, compression, quota dan encryption.",
-  fat32: "FAT32 sangat serasi tetapi saiz satu fail terhad kepada 4 GB. Sesuai untuk media boot atau peranti lama.",
-  exfat: "exFAT sesuai untuk pemacu mudah alih berkapasiti besar dan fail besar, dengan keserasian antara Windows dan macOS."
-};
-
-const raidNotes = {
-  0: "RAID 0 membahagi data merentasi beberapa pemacu untuk prestasi. Jika satu pemacu gagal, keseluruhan data boleh hilang.",
-  1: "RAID 1 menyalin data yang sama ke dua pemacu. Sesuai untuk ketersediaan data tetapi kapasiti efektif hanya separuh.",
-  5: "RAID 5 menggunakan striping dan parity. Minimum tiga pemacu dan boleh menahan kegagalan satu pemacu.",
-  10: "RAID 10 menggabungkan mirroring dan striping. Prestasi serta ketahanan baik tetapi memerlukan minimum empat pemacu."
-};
-
-const matchingPairs = [
-  { id: "cpu", left: "M.2 NVMe SSD", right: "Pemacu berkelajuan tinggi menggunakan PCIe" },
-  { id: "sata", left: "SATA Power", right: "Membekalkan kuasa dari PSU" },
-  { id: "ntfs", left: "NTFS", right: "Sistem fail Windows dengan permission" },
-  { id: "raid1", left: "RAID 1", right: "Salinan sama pada dua pemacu" }
 ];
 
-const sequenceSteps = [
-  { id: 1, text: "Periksa keserasian pemacu, slot dan kabel" },
-  { id: 2, text: "Pasang pemacu dengan prosedur ESD" },
+const matchingBank = [
+  { id: "m1", term: "SATA Power", correct: "Bekalan kuasa daripada PSU" },
+  { id: "m2", term: "M.2 NVMe", correct: "SSD menggunakan PCIe dan protokol NVMe" },
+  { id: "m3", term: "FAT32", correct: "Keserasian tinggi tetapi fail maksimum 4 GB" },
+  { id: "m4", term: "GPT", correct: "Gaya partisi moden untuk UEFI" },
+  { id: "m5", term: "RAID 5", correct: "Striping dengan parity dan minimum tiga pemacu" }
+];
+
+const sequenceBank = [
+  { id: 1, text: "Semak keserasian pemacu dan sambungan" },
+  { id: 2, text: "Pasang pemacu menggunakan prosedur ESD" },
   { id: 3, text: "Sambungkan kabel data dan kuasa" },
-  { id: 4, text: "Semak pengesanan dalam BIOS/UEFI" },
-  { id: 5, text: "Initialize dan cipta partisi" },
-  { id: 6, text: "Format dengan sistem fail sesuai" },
-  { id: 7, text: "Uji SMART, prestasi dan dokumentasi" }
+  { id: 4, text: "Semak pemacu dalam BIOS/UEFI" },
+  { id: 5, text: "Initialize, partition, format dan uji pemacu" }
 ];
 
-const scenarios = [
-  {
-    id: "windows",
-    title: "Pemacu dalaman Windows",
-    description: "Digunakan untuk aplikasi, fail besar dan kawalan permission.",
-    answer: "ntfs"
-  },
-  {
-    id: "legacy",
-    title: "Media boot untuk peranti lama",
-    description: "Perlu keserasian tinggi tetapi fail tidak melebihi 4 GB.",
-    answer: "fat32"
-  },
-  {
-    id: "portable",
-    title: "Pemacu mudah alih 1 TB",
-    description: "Perlu membawa fail video besar antara Windows dan macOS.",
-    answer: "exfat"
-  }
-];
-
-const simulationSteps = [
-  "Pilih SSD SATA",
-  "Pasang SSD pada bay 2.5 inci",
-  "Sambung kabel SATA data",
-  "Sambung kabel SATA power",
-  "Initialize pemacu",
-  "Cipta partisi",
-  "Format NTFS",
-  "Uji pemacu"
-];
-
-let matchingAssignments = {};
-let selectedMatchItem = null;
 let currentSequence = [];
-let simulationIndex = 0;
 
-document.addEventListener("DOMContentLoaded", () => {
-  initialiseTabs();
-  initialiseInfoCards();
-  resetMatchingActivity();
-  shuffleSequenceActivity();
-  renderScenarioActivity();
-  resetStorageSimulation();
-  renderDiagnosticChoices();
-  updateProgress();
-});
+document.addEventListener("DOMContentLoaded", initialiseKT13);
 
 function shuffleArray(items) {
   const copy = [...items];
@@ -121,206 +148,103 @@ function shuffleArray(items) {
   return copy;
 }
 
-function initialiseTabs() {
-  document.querySelectorAll(".mode-button").forEach(button => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".mode-button").forEach(item => item.classList.remove("active"));
-      document.querySelectorAll(".mode-section").forEach(section => section.classList.remove("active"));
-
-      button.classList.add("active");
-      document.getElementById(`${button.dataset.mode}Mode`).classList.add("active");
-    });
-  });
+function ensureCollections(profile) {
+  profile.scores = profile.scores || {};
+  profile.attempts = profile.attempts || {};
+  profile.ktDetails = profile.ktDetails || {};
+  profile.pendingAssessments = profile.pendingAssessments || {};
+  profile.officialMarks = profile.officialMarks || {};
+  profile.completed = profile.completed || [];
+  profile.badges = profile.badges || [];
+  return profile;
 }
 
-function initialiseInfoCards() {
-  document.querySelectorAll("[data-note]").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = storageNotes[button.dataset.note];
-      noteInfo.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p>`;
-    });
-  });
+function initialiseKT13() {
+  const profile = ensureCollections(C01Storage.requireProfile());
 
-  document.querySelectorAll("[data-connector]").forEach(button => {
-    button.addEventListener("click", () => {
-      connectorInfo.innerHTML = `<strong>${button.querySelector("strong").textContent}</strong><p>${connectorNotes[button.dataset.connector]}</p>`;
-    });
-  });
+  candidateName.textContent = profile.name || "-";
+  candidateId.textContent = profile.id || "-";
+  attemptNumber.textContent = (profile.attempts?.[13] || 0) + 1;
 
-  document.querySelectorAll("[data-fs]").forEach(button => {
-    button.addEventListener("click", () => {
-      fileSystemInfo.innerHTML = `<strong>${button.textContent}</strong><p>${fsNotes[button.dataset.fs]}</p>`;
-    });
-  });
+  renderMCQ();
+  renderMatching();
+  renderSequence();
 
-  document.querySelectorAll("[data-raid]").forEach(button => {
-    button.addEventListener("click", () => {
-      raidInfo.innerHTML = `<strong>RAID ${button.dataset.raid}</strong><p>${raidNotes[button.dataset.raid]}</p>`;
-    });
-  });
-}
+  const official = profile.officialMarks?.[13];
+  const pending = profile.pendingAssessments?.[13];
 
-function toggleProjectorMode() {
-  document.body.classList.toggle("projector-mode");
-}
-
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen?.();
-  } else {
-    document.exitFullscreen?.();
+  if (official?.locked === true) {
+    showOfficialResult(official);
+  } else if (pending?.status === "MENUNGGU_PENGESAHAN") {
+    showPendingResult(pending);
   }
 }
 
-function speakByteMessage() {
-  if (!("speechSynthesis" in window)) {
-    alert("Audio tidak disokong oleh pelayar ini.");
-    return;
-  }
+function renderMCQ() {
+  const shuffledQuestions = shuffleArray(questionBank);
 
-  speechSynthesis.cancel();
+  mcqContainer.innerHTML = shuffledQuestions.map((question, questionIndex) => {
+    const shuffledOptions = shuffleArray(question.options);
 
-  const utterance = new SpeechSynthesisUtterance(byteMessage.textContent);
-  utterance.lang = "ms-MY";
-  utterance.rate = 0.9;
+    return `
+      <article class="question-card" data-question-id="${question.id}">
+        <p>${questionIndex + 1}. ${question.text}</p>
 
-  speechSynthesis.speak(utterance);
+        ${shuffledOptions.map((option, optionIndex) => `
+          <label class="answer-option">
+            <input
+              type="radio"
+              name="${question.id}"
+              value="${encodeURIComponent(option)}"
+            >
+            ${String.fromCharCode(65 + optionIndex)}. ${option}
+          </label>
+        `).join("")}
+      </article>
+    `;
+  }).join("");
 }
 
-function playDataFlowAnimation() {
-  const nodes = [flowApp, flowRam, flowController, flowDrive];
+function renderMatching() {
+  const shuffledTerms = shuffleArray(matchingBank);
+  const allAnswers = shuffleArray(matchingBank.map(item => item.correct));
 
-  nodes.forEach(node => node.classList.remove("active"));
-  dataPacket.classList.remove("playing");
-  void dataPacket.offsetWidth;
-  dataPacket.classList.add("playing");
+  matchingContainer.innerHTML = shuffledTerms.map((item, index) => {
+    const options = shuffleArray(allAnswers);
 
-  const explanations = [
-    "Aplikasi menghasilkan atau mengubah data.",
-    "Data sementara berada dalam RAM.",
-    "Pengawal storan mengurus arahan baca dan tulis.",
-    "Data disimpan secara kekal pada SSD atau HDD."
-  ];
+    return `
+      <div class="matching-card" data-id="${item.id}" data-answer="${encodeURIComponent(item.correct)}">
+        <strong>${index + 1}. ${item.term}</strong>
 
-  nodes.forEach((node, index) => {
-    setTimeout(() => {
-      nodes.forEach(item => item.classList.remove("active"));
-      node.classList.add("active");
-      dataFlowExplanation.textContent = explanations[index];
-    }, index * 1000);
-  });
-
-  setTimeout(() => {
-    nodes.forEach(item => item.classList.remove("active"));
-    dataFlowExplanation.textContent = "Data selesai ditulis ke pemacu storan.";
-  }, 4300);
+        <select>
+          <option value="">Pilih padanan</option>
+          ${options.map(option => `
+            <option value="${encodeURIComponent(option)}">${option}</option>
+          `).join("")}
+        </select>
+      </div>
+    `;
+  }).join("");
 }
 
-function playDriveComparison() {
-  hddRunner.classList.remove("run");
-  ssdRunner.classList.remove("run");
-
-  void hddRunner.offsetWidth;
-
-  hddRunner.classList.add("run");
-  ssdRunner.classList.add("run");
-
-  driveComparisonResult.innerHTML = `
-    <strong>SSD lebih pantas kerana tiada bahagian mekanikal.</strong>
-    <p>HDD masih berguna untuk kapasiti besar dan kos lebih rendah.</p>
-  `;
-}
-
-function resetMatchingActivity() {
-  matchingAssignments = {};
-  selectedMatchItem = null;
-
-  const leftItems = shuffleArray(matchingPairs);
-  const rightItems = shuffleArray(matchingPairs);
-
-  matchingActivity.innerHTML = `
-    <div class="match-column" id="matchLeftColumn">
-      ${leftItems.map(item => `
-        <button class="match-item" data-id="${item.id}">
-          ${item.left}
-        </button>
-      `).join("")}
-    </div>
-
-    <div class="match-column" id="matchRightColumn">
-      ${rightItems.map(item => `
-        <button class="match-target" data-id="${item.id}">
-          ${item.right}
-        </button>
-      `).join("")}
-    </div>
-  `;
-
-  document.querySelectorAll(".match-item").forEach(item => {
-    item.addEventListener("click", () => {
-      document.querySelectorAll(".match-item").forEach(button => button.classList.remove("selected"));
-      selectedMatchItem = item.dataset.id;
-      item.classList.add("selected");
-    });
-  });
-
-  document.querySelectorAll(".match-target").forEach(target => {
-    target.addEventListener("click", () => {
-      if (!selectedMatchItem) {
-        matchingResult.textContent = "Pilih satu item di sebelah kiri dahulu.";
-        return;
-      }
-
-      Object.keys(matchingAssignments).forEach(key => {
-        if (matchingAssignments[key] === target.dataset.id) {
-          delete matchingAssignments[key];
-        }
-      });
-
-      matchingAssignments[selectedMatchItem] = target.dataset.id;
-
-      target.classList.add("filled");
-      target.innerHTML = `${target.textContent}<br><small>Dipadankan</small>`;
-
-      document.querySelectorAll(".match-item").forEach(button => button.classList.remove("selected"));
-      selectedMatchItem = null;
-    });
-  });
-
-  matchingResult.textContent = "Susunan item telah diacak.";
-}
-
-function checkMatchingActivity() {
-  const correct = matchingPairs.every(item => matchingAssignments[item.id] === item.id);
-
-  KP13_STATE.matching = correct;
-
-  matchingResult.innerHTML = correct
-    ? "<strong>✅ Semua padanan betul.</strong><p>Anda memahami fungsi asas storan.</p>"
-    : "<strong>❌ Masih ada padanan yang salah.</strong><p>Semak semula jenis peranti dan fungsinya.</p>";
-
-  updateProgress();
-}
-
-function shuffleSequenceActivity() {
-  currentSequence = shuffleArray(sequenceSteps);
+function renderSequence() {
+  currentSequence = shuffleArray(sequenceBank);
 
   if (currentSequence.every((item, index) => item.id === index + 1)) {
-    currentSequence = shuffleArray(sequenceSteps);
+    currentSequence = shuffleArray(sequenceBank);
   }
 
-  renderSequenceActivity();
-  sequenceResult.textContent = "Langkah telah diacak. Susun semula mengikut prosedur sebenar.";
+  renderSequenceList();
 }
 
-function renderSequenceActivity() {
-  sequenceList.innerHTML = currentSequence.map((item, index) => `
+function renderSequenceList() {
+  sequenceContainer.innerHTML = currentSequence.map((item, index) => `
     <div class="sequence-item" draggable="true" data-index="${index}">
       <span>${item.text}</span>
 
       <div class="sequence-controls">
-        <button onclick="moveSequenceItem(${index}, -1)">▲</button>
-        <button onclick="moveSequenceItem(${index}, 1)">▼</button>
+        <button type="button" onclick="moveSequence(${index}, -1)">▲</button>
+        <button type="button" onclick="moveSequence(${index}, 1)">▼</button>
       </div>
     </div>
   `).join("");
@@ -343,260 +267,193 @@ function renderSequenceActivity() {
       const [draggedItem] = currentSequence.splice(draggedIndex, 1);
       currentSequence.splice(targetIndex, 0, draggedItem);
 
-      renderSequenceActivity();
+      renderSequenceList();
     });
   });
 }
 
-function moveSequenceItem(index, direction) {
-  const newIndex = index + direction;
+function moveSequence(index, direction) {
+  const target = index + direction;
 
-  if (newIndex < 0 || newIndex >= currentSequence.length) {
+  if (target < 0 || target >= currentSequence.length) {
     return;
   }
 
-  [currentSequence[index], currentSequence[newIndex]] =
-    [currentSequence[newIndex], currentSequence[index]];
+  [currentSequence[index], currentSequence[target]] =
+    [currentSequence[target], currentSequence[index]];
 
-  renderSequenceActivity();
+  renderSequenceList();
 }
 
-function checkSequenceActivity() {
-  const correct = currentSequence.every((item, index) => item.id === index + 1);
+function allAnswered() {
+  const mcqComplete = questionBank.every(question =>
+    document.querySelector(`input[name="${question.id}"]:checked`)
+  );
 
-  KP13_STATE.sequence = correct;
+  const matchingComplete = [...document.querySelectorAll(".matching-card select")]
+    .every(select => select.value);
 
-  sequenceResult.innerHTML = correct
-    ? "<strong>✅ Urutan betul.</strong><p>Anda mengikuti prosedur pemasangan dan konfigurasi yang sistematik.</p>"
-    : "<strong>❌ Urutan belum tepat.</strong><p>Mulakan dengan semakan keserasian sebelum pemasangan.</p>";
-
-  updateProgress();
+  return mcqComplete && matchingComplete;
 }
 
-function renderScenarioActivity() {
-  const shuffledScenarios = shuffleArray(scenarios);
+function calculateMCQMarks() {
+  let correctCount = 0;
 
-  scenarioActivity.innerHTML = shuffledScenarios.map(scenario => {
-    const options = shuffleArray([
-      { value: "ntfs", label: "NTFS" },
-      { value: "fat32", label: "FAT32" },
-      { value: "exfat", label: "exFAT" }
-    ]);
+  questionBank.forEach(question => {
+    const selected = document.querySelector(`input[name="${question.id}"]:checked`);
 
-    return `
-      <article class="scenario-card" data-id="${scenario.id}" data-answer="${scenario.answer}">
-        <h3>${scenario.title}</h3>
-        <p>${scenario.description}</p>
-
-        <select>
-          <option value="">Pilih sistem fail</option>
-          ${options.map(option => `<option value="${option.value}">${option.label}</option>`).join("")}
-        </select>
-      </article>
-    `;
-  }).join("");
-}
-
-function checkScenarioActivity() {
-  const cards = [...document.querySelectorAll(".scenario-card")];
-
-  const complete = cards.every(card => card.querySelector("select").value);
-  const correct = complete && cards.every(card => card.querySelector("select").value === card.dataset.answer);
-
-  KP13_STATE.scenarios = correct;
-
-  scenarioResult.innerHTML = !complete
-    ? "<strong>⚠️ Lengkapkan semua pilihan.</strong>"
-    : correct
-      ? "<strong>✅ Semua pilihan tepat.</strong><p>Anda memilih sistem fail berdasarkan keperluan sebenar.</p>"
-      : "<strong>❌ Ada pilihan yang kurang sesuai.</strong><p>Semak saiz fail, keserasian dan ciri keselamatan.</p>";
-
-  updateProgress();
-}
-
-function resetStorageSimulation() {
-  simulationIndex = 0;
-  KP13_STATE.simulation = false;
-
-  const components = shuffleArray([
-    { id: "ssd", label: "💾 SSD SATA 2.5 inci" },
-    { id: "data", label: "🔌 Kabel SATA Data" },
-    { id: "power", label: "⚡ Kabel SATA Power" },
-    { id: "hdd", label: "💽 HDD 3.5 inci" }
-  ]);
-
-  componentTray.innerHTML = components.map(item => `
-    <button class="sim-component" data-id="${item.id}">
-      ${item.label}
-    </button>
-  `).join("");
-
-  componentTray.querySelectorAll(".sim-component").forEach(button => {
-    button.addEventListener("click", () => handleSimulationSelection(button));
+    if (selected && decodeURIComponent(selected.value) === question.correct) {
+      correctCount += 1;
+    }
   });
 
-  renderSimulationChecklist();
-  simulationFeedback.textContent = "Mulakan dengan mengenal pasti SSD SATA 2.5 inci.";
+  return correctCount * 5;
 }
 
-function renderSimulationChecklist() {
-  simulationChecklist.innerHTML = simulationSteps.map((step, index) => `
-    <div class="check-item ${index < simulationIndex ? "done" : ""}">
-      ${index < simulationIndex ? "✅" : "⬜"} ${step}
+function calculateMatchingMarks() {
+  let correctCount = 0;
+
+  document.querySelectorAll(".matching-card").forEach(card => {
+    const selected = card.querySelector("select").value;
+    const answer = card.dataset.answer;
+
+    if (selected === answer) {
+      correctCount += 1;
+    }
+  });
+
+  return correctCount * 5;
+}
+
+function calculateSequenceMarks() {
+  const correctPositions = currentSequence.filter((item, index) => item.id === index + 1).length;
+  return correctPositions * 5;
+}
+
+function submitKT13() {
+  const profile = ensureCollections(C01Storage.requireProfile());
+
+  if (profile.officialMarks?.[13]?.locked === true) {
+    alert("Markah rasmi KT13 telah dikunci.");
+    return;
+  }
+
+  if (profile.pendingAssessments?.[13]?.status === "MENUNGGU_PENGESAHAN") {
+    showPendingResult(profile.pendingAssessments[13]);
+    return;
+  }
+
+  if (!allAnswered()) {
+    alert("Sila jawab semua soalan dan lengkapkan semua padanan.");
+    return;
+  }
+
+  const mcqMarks = calculateMCQMarks();
+  const matchingMarks = calculateMatchingMarks();
+  const sequenceMarks = calculateSequenceMarks();
+
+  const totalMarks = mcqMarks + matchingMarks + sequenceMarks;
+  const percentage = totalMarks;
+  const passed = percentage >= KT13_CONFIG.passMark;
+  const submittedAt = new Date().toISOString();
+
+  profile.scores[13] = percentage;
+  profile.attempts[13] = (profile.attempts[13] || 0) + 1;
+
+  profile.ktDetails[13] = {
+    mcqMarks,
+    matchingMarks,
+    sequenceMarks,
+    totalMarks,
+    percentage,
+    passed,
+    official: false,
+    status: passed ? "MENUNGGU_PENGESAHAN" : "BELUM TERAMPIL",
+    submittedAt
+  };
+
+  if (passed) {
+    profile.pendingAssessments[13] = {
+      missionId: 13,
+      ktCode: "KT13",
+      score: percentage,
+      sectionA: mcqMarks,
+      sectionB: matchingMarks,
+      sectionC: sequenceMarks,
+      totalMarks,
+      passed: true,
+      status: "MENUNGGU_PENGESAHAN",
+      attempt: profile.attempts[13],
+      submittedAt
+    };
+  }
+
+  C01Storage.saveProfile(profile);
+
+  attemptNumber.textContent = profile.attempts[13] + 1;
+
+  if (passed) {
+    showPendingResult(profile.pendingAssessments[13]);
+  } else {
+    showFailResult(profile.ktDetails[13]);
+  }
+}
+
+function showPendingResult(pending) {
+  assessmentStatus.textContent = `MENUNGGU PENGESAHAN • ${pending.score}%`;
+  assessmentStatus.className = "pending";
+
+  resultPanel.innerHTML = `
+    <div class="result-card pass">
+      <h2>Markah Sementara: ${pending.score}%</h2>
+      <p>Bahagian A: ${pending.sectionA}/50</p>
+      <p>Bahagian B: ${pending.sectionB}/25</p>
+      <p>Bahagian C: ${pending.sectionC}/25</p>
+
+      <h3 class="pending">⏳ MENUNGGU PENGESAHAN PEGAWAI PENILAI</h3>
+
+      <p>
+        Markah telah disimpan. KP14 hanya dibuka selepas
+        markah rasmi disahkan melalui Mod Guru.
+      </p>
     </div>
-  `).join("");
+  `;
+
+  resultPanel.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-function handleSimulationSelection(button) {
-  const expected = ["ssd", "ssd", "data", "power"][simulationIndex];
+function showFailResult(detail) {
+  assessmentStatus.textContent = `BELUM TERAMPIL • ${detail.percentage}%`;
+  assessmentStatus.className = "failed";
 
-  if (simulationIndex < 4) {
-    if (button.dataset.id !== expected) {
-      simulationFeedback.innerHTML = "<strong>❌ Komponen belum tepat.</strong><p>Semak semula arahan dan jenis komponen.</p>";
-      return;
-    }
+  resultPanel.innerHTML = `
+    <div class="result-card fail">
+      <h2>Markah: ${detail.percentage}%</h2>
+      <p>Bahagian A: ${detail.mcqMarks}/50</p>
+      <p>Bahagian B: ${detail.matchingMarks}/25</p>
+      <p>Bahagian C: ${detail.sequenceMarks}/25</p>
 
-    simulationIndex += 1;
-    renderSimulationChecklist();
+      <h3 class="failed">❌ BELUM TERAMPIL</h3>
 
-    const messages = [
-      "SSD dikenal pasti. Klik SSD sekali lagi untuk memasangnya pada bay.",
-      "SSD dipasang pada bay 2.5 inci. Pilih kabel SATA data.",
-      "Kabel data disambungkan ke motherboard. Pilih kabel SATA power.",
-      "Kabel kuasa disambungkan. Teruskan konfigurasi perisian."
-    ];
-
-    simulationFeedback.textContent = messages[simulationIndex - 1];
-
-    if (simulationIndex === 4) {
-      renderSoftwareSimulationControls();
-    }
-
-    return;
-  }
+      <p>
+        Ulang kaji KP13 dan cuba semula.
+      </p>
+    </div>
+  `;
 }
 
-function renderSoftwareSimulationControls() {
-  componentTray.innerHTML = shuffleArray([
-    { id: 4, label: "Initialize GPT" },
-    { id: 5, label: "Cipta Simple Volume" },
-    { id: 6, label: "Format NTFS" },
-    { id: 7, label: "Semak SMART & prestasi" }
-  ]).map(item => `
-    <button class="sim-component" data-step="${item.id}">
-      ${item.label}
-    </button>
-  `).join("");
+function showOfficialResult(official) {
+  assessmentStatus.textContent = `TERAMPIL • ${official.score}%`;
+  assessmentStatus.className = "official";
 
-  componentTray.querySelectorAll(".sim-component").forEach(button => {
-    button.addEventListener("click", () => {
-      const expectedStep = simulationIndex;
+  submitButton.disabled = true;
+  submitButton.textContent = "MARKAH RASMI DIKUNCI";
 
-      if (Number(button.dataset.step) !== expectedStep) {
-        simulationFeedback.innerHTML = "<strong>❌ Tindakan belum mengikut urutan.</strong><p>Initialize dahulu sebelum mencipta volume.</p>";
-        return;
-      }
-
-      simulationIndex += 1;
-      button.disabled = true;
-      button.classList.add("active");
-      renderSimulationChecklist();
-
-      if (simulationIndex === simulationSteps.length) {
-        KP13_STATE.simulation = true;
-        simulationFeedback.innerHTML = "<strong>✅ Simulasi lengkap.</strong><p>SSD dipasang, dikonfigurasi dan diuji dengan betul.</p>";
-        updateProgress();
-      }
-    });
-  });
-}
-
-function renderDiagnosticChoices() {
-  const choices = shuffleArray([
-    {
-      id: "cable",
-      label: "Periksa kabel SATA data dan kuasa",
-      correct: true,
-      feedback: "Langkah pertama yang sesuai untuk pemacu SATA yang tidak dikesan."
-    },
-    {
-      id: "bios",
-      label: "Semak pengesanan dalam BIOS/UEFI",
-      correct: true,
-      feedback: "Jika kabel betul, semak sama ada firmware mengesan pemacu."
-    },
-    {
-      id: "printer",
-      label: "Pasang semula driver printer",
-      correct: false,
-      feedback: "Printer tidak berkaitan dengan pengesanan pemacu storan."
-    },
-    {
-      id: "speaker",
-      label: "Tukar speaker komputer",
-      correct: false,
-      feedback: "Speaker tidak menyebabkan pemacu gagal dikesan."
-    }
-  ]);
-
-  diagnosticChoices.innerHTML = choices.map(choice => `
-    <button
-      class="diagnostic-card"
-      data-correct="${choice.correct}"
-      data-feedback="${choice.feedback}"
-    >
-      ${choice.label}
-    </button>
-  `).join("");
-
-  diagnosticChoices.querySelectorAll(".diagnostic-card").forEach(button => {
-    button.addEventListener("click", () => {
-      if (button.dataset.correct === "true") {
-        KP13_STATE.diagnostic = true;
-        diagnosticResult.innerHTML = `<strong>✅ Pilihan tepat.</strong><p>${button.dataset.feedback}</p>`;
-      } else {
-        diagnosticResult.innerHTML = `<strong>❌ Pilihan tidak berkaitan.</strong><p>${button.dataset.feedback}</p>`;
-      }
-
-      updateProgress();
-    });
-  });
-}
-
-function updateProgress() {
-  const completed = Object.values(KP13_STATE).filter(Boolean).length;
-  const percentage = Math.round((completed / 5) * 100);
-
-  completionText.textContent = `${completed} daripada 5 aktiviti selesai.`;
-  progressBar.style.width = `${percentage}%`;
-
-  const profile = C01Storage.requireProfile();
-  profile.kpProgress = profile.kpProgress || {};
-  profile.kpProgress[13] = percentage;
-  C01Storage.saveProfile(profile);
-}
-
-function completeKP13() {
-  const completed = Object.values(KP13_STATE).every(Boolean);
-
-  if (!completed) {
-    alert("Lengkapkan semua aktiviti, simulasi dan diagnosis KP13 dahulu.");
-    return;
-  }
-
-  const profile = C01Storage.requireProfile();
-
-  profile.kpProgress = profile.kpProgress || {};
-  profile.kpProgress[13] = 100;
-
-  profile.badges = profile.badges || [];
-
-  if (!profile.badges.includes("storage-technician")) {
-    profile.badges.push("storage-technician");
-    profile.xp = Number(profile.xp || 0) + 50;
-    profile.coins = Number(profile.coins || 0) + 10;
-  }
-
-  C01Storage.saveProfile(profile);
-  location.href = "../../kt/kt13/index.html";
+  resultPanel.innerHTML = `
+    <div class="result-card official">
+      <h2>Markah Rasmi: ${official.score}%</h2>
+      <h3 class="official">✅ TERAMPIL</h3>
+      <p>Markah telah disahkan dan dikunci oleh Pegawai Penilai.</p>
+    </div>
+  `;
 }
