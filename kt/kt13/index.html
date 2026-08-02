@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KT13 - Konfigurasi Storan Komputer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+
+<body>
+  <main class="kt-page">
+
+    <header class="panel header-panel">
+      <div>
+        <p class="eyebrow">IT-020-3:2013-C01/KT(13/15)</p>
+        <h1>KT13: KONFIGURASI STORAN KOMPUTER</h1>
+        <p>20 soalan • Markah penuh 100 • Lulus 60%</p>
+      </div>
+
+      <button class="secondary-button" onclick="location.href='../../kp/kp13/index.html'">
+        ← Kembali KP13
+      </button>
+    </header>
+
+    <section class="panel candidate-panel">
+      <div>
+        <span>Nama Pelatih</span>
+        <strong id="candidateName">-</strong>
+      </div>
+
+      <div>
+        <span>ID Pelatih</span>
+        <strong id="candidateId">-</strong>
+      </div>
+
+      <div>
+        <span>Percubaan</span>
+        <strong id="attemptNumber">1</strong>
+      </div>
+
+      <div>
+        <span>Status</span>
+        <strong id="assessmentStatus">BELUM DINILAI</strong>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">BAHAGIAN A</p>
+          <h2>Pilihan Berganda</h2>
+        </div>
+
+        <span class="section-score">10 soalan × 5 markah</span>
+      </div>
+
+      <div id="mcqContainer"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">BAHAGIAN B</p>
+          <h2>Padanan</h2>
+        </div>
+
+        <span class="section-score">5 soalan × 5 markah</span>
+      </div>
+
+      <p>
+        Pilihan jawapan diacak setiap kali KT dibuka.
+      </p>
+
+      <div id="matchingContainer"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">BAHAGIAN C</p>
+          <h2>Susunan Langkah</h2>
+        </div>
+
+        <span class="section-score">5 langkah × 5 markah</span>
+      </div>
+
+      <p>
+        Susun langkah konfigurasi storan mengikut urutan sebenar.
+      </p>
+
+      <div id="sequenceContainer" class="sequence-list"></div>
+    </section>
+
+    <footer class="panel footer-panel">
+      <button id="submitButton" class="primary-button" onclick="submitKT13()">
+        HANTAR JAWAPAN
+      </button>
+
+      <button class="secondary-button" onclick="location.href='../../dashboard.html'">
+        Dashboard
+      </button>
+
+      <div id="resultPanel"></div>
+    </footer>
+
+  </main>
+
+  <script src="../../storage.js?v=1"></script>
+  <script src="script.js?v=1"></script>
+</body>
+</html>
