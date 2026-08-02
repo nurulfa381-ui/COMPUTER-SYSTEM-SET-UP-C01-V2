@@ -74,8 +74,8 @@ const C01_MISSIONS = [
   {
     "id": 13,
     "title": "Pengujian Sistem Komputer",
-    "kp": "kp/kp13.html",
-    "kt": "kt/kt13.html"
+    "kp": "kp/kp13/index.html",
+    "kt": "kt/kt13/index.html"
   },
   {
     "id": 14,
