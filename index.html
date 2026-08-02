@@ -1,82 +1,350 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>COMPUTER SYSTEM SET-UP C01</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>C01 - KP13 Konfigurasi Storan Komputer</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root{
+      --bg1:#020712;
+      --bg2:#08243c;
+      --panel:#0d2f4c;
+      --panel2:#123d5f;
+      --text:#ffffff;
+      --muted:#e7f0f7;
+      --blue:#38bdf8;
+      --orange:#fbbf24;
+      --green:#34d399;
+      --border:#5a86aa;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Poppins",Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 8%,rgba(56,189,248,.18),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(251,191,36,.15),transparent 30%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+    }
+
+    h1,h2,h3,strong{
+      font-family:"Montserrat",Arial,sans-serif;
+    }
+
+    button{
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .page{
+      width:min(1400px,100%);
+      margin:auto;
+      padding:28px;
+    }
+
+    .hero{
+      min-height:calc(100vh - 56px);
+      display:grid;
+      place-items:center;
+    }
+
+    .hero-card{
+      width:100%;
+      padding:42px;
+      border:2px solid var(--border);
+      border-radius:30px;
+      background:linear-gradient(145deg,rgba(18,61,95,.98),rgba(7,28,46,.98));
+      box-shadow:0 28px 80px rgba(0,0,0,.45);
+    }
+
+    .top-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .eyebrow{
+      margin:0;
+      color:#7dd3fc;
+      font-size:1rem;
+      font-weight:800;
+      letter-spacing:.12em;
+    }
+
+    h1{
+      margin:.2em 0;
+      font-size:clamp(3rem,7vw,6.5rem);
+      line-height:1.03;
+    }
+
+    .subtitle{
+      max-width:1000px;
+      color:var(--muted);
+      font-size:clamp(1.2rem,2vw,1.8rem);
+      line-height:1.6;
+    }
+
+    .profile-box{
+      margin:28px 0;
+      padding:18px 22px;
+      border:2px solid var(--border);
+      border-radius:18px;
+      background:var(--panel2);
+    }
+
+    .profile-box span{
+      color:var(--muted);
+    }
+
+    .profile-box strong{
+      display:block;
+      margin-top:4px;
+      color:var(--orange);
+      font-size:1.3rem;
+    }
+
+    .module-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:22px;
+      margin-top:28px;
+    }
+
+    .module-card{
+      padding:26px;
+      border:2px solid var(--border);
+      border-radius:24px;
+      background:#123d5f;
+    }
+
+    .module-card h2{
+      margin:.2em 0;
+      font-size:clamp(2rem,4vw,3rem);
+    }
+
+    .module-card p{
+      color:var(--muted);
+      font-size:1.1rem;
+      line-height:1.6;
+    }
+
+    .module-card ul{
+      padding-left:24px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .module-icon{
+      font-size:4rem;
+    }
+
+    .button-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .primary,
+    .secondary{
+      border:0;
+      border-radius:16px;
+      padding:16px 24px;
+      font-weight:800;
+    }
+
+    .primary{
+      color:#111827;
+      background:linear-gradient(135deg,#fde68a,var(--orange));
+    }
+
+    .secondary{
+      color:#ffffff;
+      border:2px solid #60a5fa;
+      background:#1d4ed8;
+    }
+
+    .status{
+      margin-top:20px;
+      padding:16px;
+      border-left:7px solid var(--green);
+      border-radius:14px;
+      color:#ffffff;
+      background:rgba(52,211,153,.12);
+    }
+
+    .footer{
+      margin-top:26px;
+      color:var(--muted);
+      text-align:center;
+      font-size:.95rem;
+    }
+
+    @media(max-width:850px){
+      .page{
+        padding:14px;
+      }
+
+      .hero-card{
+        padding:24px;
+      }
+
+      .module-grid{
+        grid-template-columns:1fr;
+      }
+
+      .button-row button{
+        width:100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="bg-grid"></div>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-card">
 
-  <main class="landing-shell">
-    <section class="hero-panel glass">
-      <div class="brand-badge">IT-020-3:2013-C01</div>
-      <div class="hero-icon">🖥️</div>
+        <div class="top-row">
+          <p class="eyebrow">
+            COMPUTER SYSTEM SET-UP • C01
+          </p>
 
-      <p class="eyebrow" data-bm="ABM INTERAKTIF TVET" data-en="TVET INTERACTIVE LEARNING">ABM INTERAKTIF TVET</p>
-
-      <h1>COMPUTER SYSTEM<br><span>SET-UP</span></h1>
-
-      <p class="hero-subtitle"
-         data-bm="Belajar. Berlatih. Laksanakan tugasan seperti juruteknik sebenar."
-         data-en="Learn. Practise. Perform tasks like a real computer technician.">
-        Belajar. Berlatih. Laksanakan tugasan seperti juruteknik sebenar.
-      </p>
-
-      <div class="landing-actions">
-        <button class="btn btn-primary" onclick="location.href='login.html'">
-          🚀 <span data-bm="MULA MISI" data-en="START MISSION">MULA MISI</span>
-        </button>
-
-        <button class="btn btn-secondary" onclick="toggleLanguage()">🌐 BM / EN</button>
-
-        <button class="btn btn-dark" onclick="location.href='teacher.html'">
-          👨‍🏫 <span data-bm="MOD GURU" data-en="TEACHER MODE">MOD GURU</span>
-        </button>
-      </div>
-
-      <div class="feature-strip">
-        <div><b>15</b><span data-bm="Misi" data-en="Missions">Misi</span></div>
-        <div><b>3</b><span data-bm="Mod Pembelajaran" data-en="Learning Modes">Mod Pembelajaran</span></div>
-        <div><b>60%</b><span data-bm="Markah Lulus" data-en="Pass Mark">Markah Lulus</span></div>
-      </div>
-    </section>
-
-    <section class="preview-panel glass">
-      <div class="workshop-preview">
-        <div class="preview-title">
-          <span>VIRTUAL COMPUTER WORKSHOP</span>
-          <span class="status-dot">● ONLINE</span>
+          <button class="secondary" onclick="toggleFullscreen()">
+            ⛶ Skrin Penuh
+          </button>
         </div>
 
-        <div class="preview-grid">
-          <div class="preview-card">📋<span>Job Request</span></div>
-          <div class="preview-card">🧰<span>Toolbox</span></div>
-          <div class="preview-card">🖥️<span>Workbench</span></div>
-          <div class="preview-card">📦<span>Hardware Shelf</span></div>
-          <div class="preview-card">🔧<span>Diagnostic Tools</span></div>
-          <div class="preview-card">📑<span>Report Table</span></div>
+        <h1>KP13: KONFIGURASI STORAN KOMPUTER</h1>
+
+        <p class="subtitle">
+          Nota interaktif, animasi, simulasi pemasangan SSD,
+          latihan pengukuhan dan penilaian KT13.
+        </p>
+
+        <div class="profile-box">
+          <span>Pelatih</span>
+          <strong id="studentDisplay">
+            Belum login
+          </strong>
         </div>
 
-        <div class="byte-box">
-          <div class="byte-avatar">🤖</div>
-          <div>
-            <b>BYTE AI</b>
-            <p data-bm="Selamat datang Technician. Bersedia untuk misi pertama?"
-               data-en="Welcome Technician. Ready for your first mission?">
-              Selamat datang Technician. Bersedia untuk misi pertama?
+        <div class="module-grid">
+
+          <article class="module-card">
+            <div class="module-icon">📘</div>
+            <h2>KP13</h2>
+            <p>
+              Pelajari jenis storan, sambungan SATA dan M.2,
+              partisi, sistem fail, RAID, pemasangan serta diagnosis.
             </p>
-          </div>
+
+            <ul>
+              <li>Nota tulisan besar</li>
+              <li>Animasi HDD dan SSD</li>
+              <li>Padanan dan susunan langkah</li>
+              <li>Simulasi juruteknik</li>
+            </ul>
+
+            <div class="button-row">
+              <button
+                class="primary"
+                onclick="openKP13()"
+              >
+                MULA KP13
+              </button>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <div class="module-icon">📝</div>
+            <h2>KT13</h2>
+            <p>
+              Penilaian automatik dengan pilihan jawapan,
+              padanan dan susunan langkah yang diacak.
+            </p>
+
+            <ul>
+              <li>Markah penuh 100%</li>
+              <li>Lulus 60%</li>
+              <li>Jawapan diacak</li>
+              <li>Status keputusan disimpan</li>
+            </ul>
+
+            <div class="button-row">
+              <button
+                class="primary"
+                onclick="openKT13()"
+              >
+                BUKA KT13
+              </button>
+            </div>
+          </article>
+
         </div>
+
+        <div class="status">
+          ✅ Pelajar hanya perlu menggunakan satu pautan utama ini.
+        </div>
+
+        <p class="footer">
+          SERVER HERO C01 • KP13 dan KT13
+        </p>
+
       </div>
     </section>
   </main>
 
   <script src="storage.js"></script>
-  <script src="language.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      try {
+        const profile = C01Storage.getProfile
+          ? C01Storage.getProfile()
+          : null;
+
+        if (profile && profile.name) {
+          document.getElementById("studentDisplay").textContent =
+            `${profile.avatar || "🧑‍💻"} ${profile.name} • ${profile.id || "-"}`;
+        }
+      } catch (error) {
+        console.log("Profil belum tersedia.");
+      }
+    });
+
+    function openKP13() {
+      window.location.href = "kp/kp13/index.html";
+    }
+
+    function openKT13() {
+      window.location.href = "kt/kt13/index.html";
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+  </script>
 </body>
 </html>
