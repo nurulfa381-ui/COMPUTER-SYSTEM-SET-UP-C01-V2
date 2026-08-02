@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Virtual Computer Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="workshop-shell">
+    <header class="dashboard-header">
+      <div>
+        <p class="eyebrow">REAL TECHNICIAN MODE</p>
+        <h1>Virtual Computer Workshop</h1>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary" onclick="location.href='dashboard.html'">← Dashboard</button>
+      </div>
+    </header>
+
+    <section class="workshop-stage glass">
+      <div class="workshop-topbar">
+        <span>WORKSHOP STATUS</span>
+        <b>● READY</b>
+      </div>
+
+      <div class="workshop-grid">
+        <button class="workstation" onclick="openStation('job')">
+          <span>📋</span>
+          <b>Job Request</b>
+          <small>Terima arahan kerja</small>
+        </button>
+
+        <button class="workstation" onclick="openStation('toolbox')">
+          <span>🧰</span>
+          <b>Toolbox</b>
+          <small>Pilih alatan</small>
+        </button>
+
+        <button class="workstation main-bench" onclick="openStation('bench')">
+          <span>🖥️</span>
+          <b>Computer Workbench</b>
+          <small>Laksanakan pemasangan</small>
+        </button>
+
+        <button class="workstation" onclick="openStation('hardware')">
+          <span>📦</span>
+          <b>Hardware Shelf</b>
+          <small>Pilih komponen</small>
+        </button>
+
+        <button class="workstation" onclick="openStation('diagnostic')">
+          <span>🔧</span>
+          <b>Diagnostic Tools</b>
+          <small>Uji sistem</small>
+        </button>
+
+        <button class="workstation" onclick="openStation('report')">
+          <span>📑</span>
+          <b>Report Table</b>
+          <small>Sediakan laporan</small>
+        </button>
+      </div>
+    </section>
+
+    <section id="stationPanel" class="station-panel glass">
+      <div class="byte-avatar">🤖</div>
+      <div>
+        <b>BYTE AI</b>
+        <p>Pilih satu stesen kerja untuk memulakan latihan.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const stationText = {
+      job: 'Job Request akan memaparkan aduan pelanggan, spesifikasi komputer dan hasil kerja yang diperlukan.',
+      toolbox: 'Toolbox membolehkan pelajar memilih pemutar skru, multimeter, anti-static wrist strap dan peralatan keselamatan.',
+      bench: 'Computer Workbench ialah ruang utama pemasangan CPU, RAM, storan, motherboard dan kabel.',
+      hardware: 'Hardware Shelf menyimpan komponen yang perlu dipilih berdasarkan keserasian.',
+      diagnostic: 'Diagnostic Tools digunakan untuk menjalankan POST, CPU test, RAM test, storage test dan continuity test.',
+      report: 'Report Table digunakan untuk melengkapkan checklist, UAT, asset tag, warranty dan laporan akhir.'
+    };
+
+    function openStation(key){
+      document.querySelector('#stationPanel p').textContent = stationText[key];
+    }
+  </script>
+</body>
+</html>

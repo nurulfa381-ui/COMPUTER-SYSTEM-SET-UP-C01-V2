@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mod Guru C01</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="form-shell">
+    <section class="login-card glass">
+      <h1>MOD GURU</h1>
+      <label>PIN Guru</label>
+      <input id="teacherPin" class="field" type="password">
+      <button class="btn btn-primary full" onclick="teacherLogin()">Masuk</button>
+      <button class="btn btn-secondary full" onclick="location.href='index.html'">Kembali</button>
+      <div id="teacherResult"></div>
+    </section>
+  </main>
+
+  <script src="storage.js"></script>
+  <script>
+    function teacherLogin(){
+      if(document.getElementById('teacherPin').value !== '2026'){
+        alert('PIN salah.');
+        return;
+      }
+
+      const p = C01Storage.loadProfile();
+      document.getElementById('teacherResult').innerHTML = p ? `
+        <div class="teacher-summary">
+          <h3>${p.name}</h3>
+          <p>ID: ${p.id}</p>
+          <p>XP: ${p.xp}</p>
+          <p>Professional Score: ${p.professionalScore}%</p>
+          <p>Misi Dibuka: ${p.unlocked}/15</p>
+        </div>
+      ` : '<p>Tiada data pelatih.</p>';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login Pelatih - C01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <main class="form-shell">
+    <section class="login-card glass">
+      <button class="back-link" onclick="location.href='index.html'">←</button>
+
+      <p class="eyebrow">COMPUTER SYSTEM SET-UP</p>
+      <h1 data-bm="LOG MASUK PELATIH" data-en="STUDENT LOGIN">LOG MASUK PELATIH</h1>
+
+      <label data-bm="Nama Pelatih" data-en="Student Name">Nama Pelatih</label>
+      <input id="studentName" class="field" autocomplete="name">
+
+      <label data-bm="No. Kad Pengenalan / ID" data-en="Identity Card / Student ID">No. Kad Pengenalan / ID</label>
+      <input id="studentId" class="field">
+
+      <label data-bm="Pilih Avatar" data-en="Choose Avatar">Pilih Avatar</label>
+      <div class="avatar-grid" id="avatarGrid">
+        <button class="avatar active" data-avatar="👨‍💻">👨‍💻</button>
+        <button class="avatar" data-avatar="👩‍💻">👩‍💻</button>
+        <button class="avatar" data-avatar="🧑‍🔧">🧑‍🔧</button>
+        <button class="avatar" data-avatar="👷">👷</button>
+        <button class="avatar" data-avatar="🖥️">🖥️</button>
+        <button class="avatar" data-avatar="🚀">🚀</button>
+      </div>
+
+      <button class="btn btn-primary full" onclick="saveStudent()">
+        <span data-bm="MASUK DASHBOARD" data-en="ENTER DASHBOARD">MASUK DASHBOARD</span>
+      </button>
+
+      <button class="btn btn-secondary full" onclick="toggleLanguage()">🌐 BM / EN</button>
+    </section>
+  </main>
+
+  <script src="storage.js"></script>
+  <script src="language.js"></script>
+  <script>
+    let selectedAvatar = '👨‍💻';
+
+    document.querySelectorAll('.avatar').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.avatar').forEach(x => x.classList.remove('active'));
+        button.classList.add('active');
+        selectedAvatar = button.dataset.avatar;
+      });
+    });
+
+    function saveStudent(){
+      const name = document.getElementById('studentName').value.trim();
+      const id = document.getElementById('studentId').value.trim();
+
+      if(!name || !id){
+        alert(currentLanguage() === 'en' ? 'Please complete all fields.' : 'Sila lengkapkan semua ruangan.');
+        return;
+      }
+
+      const existing = C01Storage.loadProfile();
+
+      const profile = existing && existing.id === id ? existing : C01Storage.createProfile({
+        name,
+        id,
+        avatar: selectedAvatar,
+        language: currentLanguage()
+      });
+
+      profile.name = name;
+      profile.id = id;
+      profile.avatar = selectedAvatar;
+      profile.language = currentLanguage();
+
+      C01Storage.saveProfile(profile);
+      location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>
