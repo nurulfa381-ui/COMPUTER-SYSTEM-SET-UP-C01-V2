@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KP13 - Konfigurasi Storan Komputer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="kp/kp13/style.css?v=1">
+</head>
+
+<body>
+  <main class="kp-page">
+
+    <header class="panel hero-panel">
+      <div>
+        <p class="eyebrow">MISSION 13 • IT-020-3:2013-C01/KP(13/15)</p>
+        <h1>KONFIGURASI STORAN KOMPUTER</h1>
+        <p>
+          Kenal pasti jenis storan, sambungan, partisi, sistem fail,
+          RAID, pemasangan dan langkah diagnosis secara interaktif.
+        </p>
+      </div>
+
+      <div class="hero-actions">
+        <button class="secondary-button" onclick="location.href='dashboard.html'">
+          ← Dashboard
+        </button>
+
+        <button class="secondary-button" onclick="toggleProjectorMode()">
+          📽️ Mod Projektor
+        </button>
+
+        <button class="secondary-button" onclick="toggleFullscreen()">
+          ⛶ Skrin Penuh
+        </button>
+      </div>
+    </header>
+
+    <section class="panel byte-panel">
+      <div class="byte-avatar">🤖</div>
+
+      <div>
+        <strong>BYTE AI</strong>
+        <p id="byteMessage">
+          Storan bukan sekadar menyimpan fail. Juruteknik perlu memahami
+          jenis pemacu, port, partisi, sistem fail, prestasi dan keselamatan data.
+        </p>
+      </div>
+
+      <button class="secondary-button" onclick="speakByteMessage()">
+        🔊 Dengar
+      </button>
+    </section>
+
+    <nav class="panel mode-tabs">
+      <button class="mode-button active" data-mode="learn">
+        📘 Nota Interaktif
+      </button>
+
+      <button class="mode-button" data-mode="animation">
+        🎞️ Animasi
+      </button>
+
+      <button class="mode-button" data-mode="practice">
+        🧩 Aktiviti
+      </button>
+
+      <button class="mode-button" data-mode="simulation">
+        🧰 Simulasi Juruteknik
+      </button>
+
+      <button class="mode-button" data-mode="summary">
+        ✅ Rumusan
+      </button>
+    </nav>
+
+    <section id="learnMode" class="mode-section active">
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 1</p>
+            <h2>Fungsi Sistem Storan</h2>
+          </div>
+        </div>
+
+        <div class="note-grid">
+          <button class="note-card" data-note="permanent">
+            💾
+            <strong>Penyimpanan Kekal</strong>
+            <span>Data kekal selepas kuasa dimatikan.</span>
+          </button>
+
+          <button class="note-card" data-note="boot">
+            🚀
+            <strong>Pemacu Sistem</strong>
+            <span>Menyimpan sistem pengoperasian dan fail boot.</span>
+          </button>
+
+          <button class="note-card" data-note="backup">
+            🛡️
+            <strong>Sandaran Data</strong>
+            <span>Mengurangkan risiko kehilangan data.</span>
+          </button>
+
+          <button class="note-card" data-note="sharing">
+            🌐
+            <strong>Perkongsian Data</strong>
+            <span>Menyokong akses fail melalui rangkaian.</span>
+          </button>
+        </div>
+
+        <div id="noteInfo" class="info-panel">
+          Klik mana-mana kad untuk melihat penerangan lengkap.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 2</p>
+            <h2>Jenis Peranti Storan</h2>
+          </div>
+        </div>
+
+        <div class="storage-comparison">
+          <article class="storage-card">
+            <div class="device-illustration hdd-illustration">
+              <div class="platter"></div>
+              <div class="arm"></div>
+            </div>
+            <h3>HDD</h3>
+            <p>
+              Menggunakan piring magnetik dan kepala baca/tulis.
+              Kapasiti besar pada kos lebih rendah tetapi lebih perlahan
+              dan sensitif terhadap hentakan.
+            </p>
+            <ul>
+              <li>Sesuai untuk simpanan pukal</li>
+              <li>Kelajuan biasa: 5400/7200 RPM</li>
+              <li>Menggunakan SATA</li>
+            </ul>
+          </article>
+
+          <article class="storage-card">
+            <div class="device-illustration sata-ssd">
+              <span>SSD</span>
+            </div>
+            <h3>SATA SSD</h3>
+            <p>
+              Menggunakan memori flash tanpa bahagian bergerak.
+              Lebih pantas, senyap dan tahan hentakan berbanding HDD.
+            </p>
+            <ul>
+              <li>Saiz biasa 2.5 inci</li>
+              <li>Menggunakan kabel SATA data dan kuasa</li>
+              <li>Prestasi terhad oleh SATA</li>
+            </ul>
+          </article>
+
+          <article class="storage-card">
+            <div class="device-illustration nvme-ssd">
+              <span>M.2 NVMe</span>
+            </div>
+            <h3>M.2 NVMe SSD</h3>
+            <p>
+              Menggunakan laluan PCIe dan protokol NVMe.
+              Sangat pantas dan dipasang terus pada slot M.2 motherboard.
+            </p>
+            <ul>
+              <li>Tiada kabel data</li>
+              <li>Prestasi tinggi</li>
+              <li>Perlu semak keserasian slot</li>
+            </ul>
+          </article>
+
+          <article class="storage-card">
+            <div class="device-illustration optical-drive">
+              <span>DVD</span>
+            </div>
+            <h3>Pemacu Optik</h3>
+            <p>
+              Membaca dan menulis media CD, DVD atau Blu-ray.
+              Kurang digunakan pada komputer moden tetapi masih berguna
+              untuk media pemasangan dan arkib tertentu.
+            </p>
+            <ul>
+              <li>Gunakan kabel SATA</li>
+              <li>Media boleh tanggal</li>
+              <li>Kelajuan lebih perlahan</li>
+            </ul>
+          </article>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 3</p>
+            <h2>Port dan Sambungan Storan</h2>
+          </div>
+        </div>
+
+        <div class="connector-grid">
+          <button class="connector-card" data-connector="sata-data">
+            <div class="connector-visual sata-data-port">L</div>
+            <strong>SATA Data</strong>
+            <span>Sambungan data antara pemacu dan motherboard.</span>
+          </button>
+
+          <button class="connector-card" data-connector="sata-power">
+            <div class="connector-visual sata-power-port">15 PIN</div>
+            <strong>SATA Power</strong>
+            <span>Membekalkan kuasa daripada PSU kepada pemacu.</span>
+          </button>
+
+          <button class="connector-card" data-connector="m2">
+            <div class="connector-visual m2-slot">M.2</div>
+            <strong>Slot M.2</strong>
+            <span>Untuk SSD M.2 SATA atau NVMe bergantung motherboard.</span>
+          </button>
+
+          <button class="connector-card" data-connector="usb">
+            <div class="connector-visual usb-port">USB</div>
+            <strong>USB</strong>
+            <span>Untuk pemacu luaran dan media boleh tanggal.</span>
+          </button>
+        </div>
+
+        <div id="connectorInfo" class="info-panel">
+          Klik jenis sambungan untuk melihat amaran pemasangan.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 4</p>
+            <h2>Partisi dan Sistem Fail</h2>
+          </div>
+        </div>
+
+        <div class="two-column-grid">
+          <section class="content-card">
+            <h3>Partisi</h3>
+            <p>
+              Partisi membahagikan satu pemacu fizikal kepada satu atau
+              lebih ruang logik. Setiap partisi boleh mempunyai huruf pemacu,
+              sistem fail dan tujuan berbeza.
+            </p>
+
+            <div class="partition-diagram">
+              <div class="partition system">System</div>
+              <div class="partition os">C: Windows</div>
+              <div class="partition data">D: Data</div>
+              <div class="partition recovery">Recovery</div>
+            </div>
+
+            <ul>
+              <li>System/EFI: fail boot</li>
+              <li>C: sistem pengoperasian dan aplikasi</li>
+              <li>D: data pengguna</li>
+              <li>Recovery: pemulihan sistem</li>
+            </ul>
+          </section>
+
+          <section class="content-card">
+            <h3>Sistem Fail</h3>
+            <div class="file-system-list">
+              <button data-fs="ntfs">NTFS</button>
+              <button data-fs="fat32">FAT32</button>
+              <button data-fs="exfat">exFAT</button>
+            </div>
+
+            <div id="fileSystemInfo" class="info-panel">
+              Pilih sistem fail untuk melihat kegunaan dan hadnya.
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 5</p>
+            <h2>MBR, GPT dan Mod Boot</h2>
+          </div>
+        </div>
+
+        <div class="comparison-table">
+          <div class="comparison-row heading-row">
+            <div>Ciri</div>
+            <div>MBR</div>
+            <div>GPT</div>
+          </div>
+
+          <div class="comparison-row">
+            <div>Kapasiti</div>
+            <div>Terhad sekitar 2 TB</div>
+            <div>Menyokong pemacu sangat besar</div>
+          </div>
+
+          <div class="comparison-row">
+            <div>Bilangan partisi</div>
+            <div>4 partisi utama</div>
+            <div>Lebih banyak partisi</div>
+          </div>
+
+          <div class="comparison-row">
+            <div>Mod boot</div>
+            <div>Legacy BIOS</div>
+            <div>UEFI</div>
+          </div>
+
+          <div class="comparison-row">
+            <div>Ketahanan metadata</div>
+            <div>Lebih terhad</div>
+            <div>Salinan metadata dan CRC</div>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          ⚠️ Pastikan mod boot dan gaya partisi sepadan.
+          UEFI biasanya menggunakan GPT, manakala Legacy BIOS menggunakan MBR.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 6</p>
+            <h2>RAID dan Keselamatan Data</h2>
+          </div>
+        </div>
+
+        <div class="raid-grid">
+          <button class="raid-card" data-raid="0">
+            <strong>RAID 0</strong>
+            <span>Prestasi tinggi, tiada perlindungan data.</span>
+          </button>
+
+          <button class="raid-card" data-raid="1">
+            <strong>RAID 1</strong>
+            <span>Mirroring, salinan sama pada dua pemacu.</span>
+          </button>
+
+          <button class="raid-card" data-raid="5">
+            <strong>RAID 5</strong>
+            <span>Striping dengan parity, minimum tiga pemacu.</span>
+          </button>
+
+          <button class="raid-card" data-raid="10">
+            <strong>RAID 10</strong>
+            <span>Gabungan mirroring dan striping.</span>
+          </button>
+        </div>
+
+        <div id="raidInfo" class="info-panel">
+          Pilih jenis RAID untuk melihat kelebihan, kelemahan dan kegunaan.
+        </div>
+
+        <div class="warning-box">
+          🛡️ RAID bukan pengganti backup. Data penting masih perlu disandarkan
+          ke lokasi lain.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOPIK 7</p>
+            <h2>Langkah Konfigurasi Storan</h2>
+          </div>
+        </div>
+
+        <div class="step-timeline">
+          <div class="timeline-step">
+            <span>1</span>
+            <div>
+              <strong>Periksa keserasian</strong>
+              <p>Semak jenis pemacu, slot, kabel, kapasiti dan sokongan motherboard.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <span>2</span>
+            <div>
+              <strong>Pasang perkakasan</strong>
+              <p>Gunakan prosedur ESD dan pasang pemacu dengan skru yang betul.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <span>3</span>
+            <div>
+              <strong>Sambung kabel</strong>
+              <p>SATA data ke motherboard dan SATA power ke PSU.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <span>4</span>
+            <div>
+              <strong>Semak BIOS/UEFI</strong>
+              <p>Pastikan pemacu dikesan dan mod storan sesuai.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <span>5</span>
+            <div>
+              <strong>Initialize dan partition</strong>
+              <p>Pilih GPT/MBR, cipta partisi dan tetapkan huruf pemacu.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <span>6</span>
+            <div>
+              <strong>Format</strong>
+              <p>Pilih sistem fail, label volume dan saiz allocation unit.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <span>7</span>
+            <div>
+              <strong>Uji dan dokumentasi</strong>
+              <p>Semak kesihatan SMART, prestasi, suhu dan rekod konfigurasi.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <section id="animationMode" class="mode-section">
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ANIMASI 1</p>
+            <h2>Aliran Data dari Aplikasi ke Storan</h2>
+          </div>
+
+          <button class="primary-button" onclick="playDataFlowAnimation()">
+            ▶ Mainkan Animasi
+          </button>
+        </div>
+
+        <div class="data-flow-stage">
+          <div class="flow-node" id="flowApp">
+            📝
+            <strong>Aplikasi</strong>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node" id="flowRam">
+            🧠
+            <strong>RAM</strong>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node" id="flowController">
+            ⚙️
+            <strong>Pengawal Storan</strong>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node" id="flowDrive">
+            💾
+            <strong>SSD/HDD</strong>
+          </div>
+
+          <div id="dataPacket" class="data-packet">DATA</div>
+        </div>
+
+        <div id="dataFlowExplanation" class="info-panel">
+          Tekan main untuk melihat bagaimana data bergerak.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ANIMASI 2</p>
+            <h2>Perbezaan HDD dan SSD</h2>
+          </div>
+
+          <button class="primary-button" onclick="playDriveComparison()">
+            ▶ Bandingkan
+          </button>
+        </div>
+
+        <div class="drive-race">
+          <div class="race-track">
+            <span>HDD</span>
+            <div class="race-bar">
+              <div id="hddRunner" class="runner hdd-runner">💽</div>
+            </div>
+          </div>
+
+          <div class="race-track">
+            <span>SSD</span>
+            <div class="race-bar">
+              <div id="ssdRunner" class="runner ssd-runner">🚀</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="driveComparisonResult" class="info-panel">
+          Tekan bandingkan untuk melihat perbezaan kelajuan secara visual.
+        </div>
+      </article>
+
+    </section>
+
+    <section id="practiceMode" class="mode-section">
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AKTIVITI 1</p>
+            <h2>Padankan Peranti dengan Fungsi</h2>
+          </div>
+
+          <button class="secondary-button" onclick="resetMatchingActivity()">
+            ↻ Susun Semula
+          </button>
+        </div>
+
+        <div id="matchingActivity" class="matching-activity"></div>
+
+        <button class="primary-button" onclick="checkMatchingActivity()">
+          SEMAK PADANAN
+        </button>
+
+        <div id="matchingResult" class="info-panel"></div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AKTIVITI 2</p>
+            <h2>Susun Langkah Konfigurasi</h2>
+          </div>
+
+          <button class="secondary-button" onclick="shuffleSequenceActivity()">
+            🔀 Acak Semula
+          </button>
+        </div>
+
+        <p class="instruction">
+          Seret setiap langkah sehingga menjadi urutan kerja yang betul.
+        </p>
+
+        <div id="sequenceList" class="sequence-list"></div>
+
+        <button class="primary-button" onclick="checkSequenceActivity()">
+          SEMAK URUTAN
+        </button>
+
+        <div id="sequenceResult" class="info-panel"></div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AKTIVITI 3</p>
+            <h2>Pilih Sistem Fail yang Sesuai</h2>
+          </div>
+        </div>
+
+        <div id="scenarioActivity" class="scenario-grid"></div>
+
+        <button class="primary-button" onclick="checkScenarioActivity()">
+          SEMAK PILIHAN
+        </button>
+
+        <div id="scenarioResult" class="info-panel"></div>
+      </article>
+
+    </section>
+
+    <section id="simulationMode" class="mode-section">
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SIMULASI REALISTIK</p>
+            <h2>Pasang dan Konfigurasi SSD SATA</h2>
+          </div>
+
+          <button class="secondary-button" onclick="resetStorageSimulation()">
+            ↻ Mula Semula
+          </button>
+        </div>
+
+        <div class="simulation-layout">
+          <div class="simulation-workbench">
+            <div class="pc-case">
+              <div class="drive-bay" id="driveBay">
+                <span>BAY 2.5"</span>
+              </div>
+
+              <div class="motherboard">
+                <div class="sata-port-target" id="sataPortTarget">
+                  SATA PORT
+                </div>
+              </div>
+
+              <div class="psu">
+                <div class="power-target" id="powerTarget">
+                  SATA POWER
+                </div>
+              </div>
+            </div>
+
+            <div class="component-tray" id="componentTray"></div>
+          </div>
+
+          <div class="simulation-panel">
+            <h3>Job Request #C01-013</h3>
+
+            <p>
+              Pelanggan mahu menambah SSD SATA 2.5 inci sebagai pemacu data.
+              Pasang pemacu, sambungkan kabel, initialize, cipta partisi,
+              format dan uji pemacu.
+            </p>
+
+            <div id="simulationChecklist" class="checklist"></div>
+
+            <div id="simulationFeedback" class="info-panel">
+              Mulakan dengan mengenal pasti SSD.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">DIAGNOSIS</p>
+            <h2>Pemacu Tidak Dikesan</h2>
+          </div>
+        </div>
+
+        <div id="diagnosticChoices" class="diagnostic-grid"></div>
+
+        <div id="diagnosticResult" class="info-panel"></div>
+      </article>
+
+    </section>
+
+    <section id="summaryMode" class="mode-section">
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">RUMUSAN KP13</p>
+            <h2>Isi Penting yang Wajib Dikuasai</h2>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div>✅ Bezakan HDD, SATA SSD dan NVMe SSD</div>
+          <div>✅ Kenal pasti SATA data, SATA power dan slot M.2</div>
+          <div>✅ Fahami partisi, sistem fail, MBR dan GPT</div>
+          <div>✅ Fahami kegunaan RAID dan backup</div>
+          <div>✅ Ikut urutan pemasangan dan konfigurasi yang selamat</div>
+          <div>✅ Uji kesihatan, prestasi dan dokumentasi pemacu</div>
+        </div>
+
+        <div class="completion-box">
+          <h3>Lengkapkan Aktiviti</h3>
+          <p id="completionText">0 daripada 5 aktiviti selesai.</p>
+
+          <div class="progress-track">
+            <span id="progressBar"></span>
+          </div>
+
+          <button class="primary-button" onclick="completeKP13()">
+            SELESAI KP13 & TERUS KE KT13
+          </button>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <script src="storage.js?v=1"></script>
+  <script src="kp/kp13/script.js?v=1"></script>
+</body>
+</html>
