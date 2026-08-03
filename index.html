@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <title>Computer System Set-Up C01</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css?v=20260803-restore">
+</head>
+
+<body>
+  <div class="bg-grid"></div>
+
+  <main class="landing-shell">
+
+    <section class="hero-panel glass">
+      <p class="brand-badge">
+        COMPUTER SYSTEM SET-UP • C01
+      </p>
+
+      <div class="hero-icon">🖥️</div>
+
+      <h1>
+        PENGUJIAN<br>
+        <span>SISTEM KOMPUTER</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Modul pembelajaran interaktif KP13 dan KT13 untuk pelatih
+        SKM Tahap 3 Teknologi Sistem Komputer dan Rangkaian.
+      </p>
+
+      <div id="profileNotice" class="byte-box" style="display:none;">
+        <div class="byte-avatar">👤</div>
+        <div>
+          <b>Pelatih sedang login</b>
+          <p id="profileText">-</p>
+        </div>
+      </div>
+
+      <div class="landing-actions">
+
+        <button
+          id="startButton"
+          class="btn btn-primary"
+          type="button"
+          onclick="startLearning()"
+        >
+          MULA PEMBELAJARAN
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="openLogin()"
+        >
+          LOGIN PELATIH
+        </button>
+
+        <button
+          class="btn btn-dark"
+          type="button"
+          onclick="toggleFullscreen()"
+        >
+          ⛶ SKRIN PENUH
+        </button>
+
+      </div>
+
+      <div class="feature-strip">
+        <div>
+          <b>KP13</b>
+          <span>Nota, animasi dan simulasi</span>
+        </div>
+
+        <div>
+          <b>KT13</b>
+          <span>Penilaian interaktif</span>
+        </div>
+
+        <div>
+          <b>60%</b>
+          <span>Markah lulus minimum</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-panel glass">
+      <div class="workshop-preview">
+
+        <div class="preview-title">
+          <span>MISSION 13</span>
+          <span class="status-dot">● SISTEM AKTIF</span>
+        </div>
+
+        <div class="preview-grid">
+          <div class="preview-card">
+            📘
+            <span>Nota KP13</span>
+          </div>
+
+          <div class="preview-card">
+            🎞️
+            <span>Animasi</span>
+          </div>
+
+          <div class="preview-card">
+            🧩
+            <span>Latihan</span>
+          </div>
+
+          <div class="preview-card">
+            📝
+            <span>KT13</span>
+          </div>
+        </div>
+
+        <div class="byte-box">
+          <div class="byte-avatar">🤖</div>
+
+          <div>
+            <b>BYTE AI</b>
+            <p>
+              Log masuk menggunakan nama penuh dan ID pelatih.
+              Kemudian buka Mission 13 melalui Dashboard.
+            </p>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-secondary full"
+          type="button"
+          onclick="openDashboard()"
+        >
+          BUKA DASHBOARD
+        </button>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="storage.js?v=20260803-restore"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      showProfileIfAvailable();
+    });
+
+    function getProfileSafely() {
+      try {
+        if (typeof C01Storage === "undefined") {
+          return null;
+        }
+
+        return C01Storage.loadProfile();
+      } catch (error) {
+        console.error("Profil tidak dapat dibaca:", error);
+        return null;
+      }
+    }
+
+    function showProfileIfAvailable() {
+      const profile = getProfileSafely();
+
+      if (!profile || !profile.name || !profile.id) {
+        return;
+      }
+
+      document
+        .getElementById("profileNotice")
+        .style.display = "flex";
+
+      document
+        .getElementById("profileText")
+        .textContent =
+        `${profile.avatar || "🧑‍💻"} ${profile.name} • ${profile.id}`;
+
+      document
+        .getElementById("startButton")
+        .textContent = "SAMBUNG PEMBELAJARAN";
+    }
+
+    function startLearning() {
+      const profile = getProfileSafely();
+
+      if (!profile || !profile.name || !profile.id) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      window.location.href = "dashboard.html";
+    }
+
+    function openLogin() {
+      window.location.href = "login.html";
+    }
+
+    function openDashboard() {
+      const profile = getProfileSafely();
+
+      if (!profile || !profile.name || !profile.id) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      window.location.href = "dashboard.html";
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+  </script>
+</body>
+</html>
