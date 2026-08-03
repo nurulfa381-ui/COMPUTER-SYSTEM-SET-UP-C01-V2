@@ -2,82 +2,336 @@
 <html lang="ms">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Dashboard C01</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    http-equiv="Cache-Control"
+    content="no-cache, no-store, must-revalidate"
+  >
+
+  <meta
+    http-equiv="Pragma"
+    content="no-cache"
+  >
+
+  <meta
+    http-equiv="Expires"
+    content="0"
+  >
+
+  <title>Dashboard C01 – Mission 13</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css?v=20260803-20"
+  >
 </head>
+
 <body>
+
   <div class="dashboard-shell">
+
+    <!-- HEADER -->
     <header class="dashboard-header">
+
       <div>
-        <p class="eyebrow">COMPUTER SYSTEM SET-UP C01</p>
-        <h1 id="studentGreeting">Selamat datang</h1>
+        <p class="eyebrow">
+          COMPUTER SYSTEM SET-UP C01
+        </p>
+
+        <h1 id="studentGreeting">
+          Selamat datang
+        </h1>
       </div>
 
       <div class="header-actions">
-        <button class="btn btn-secondary" onclick="toggleLanguage();renderDashboard()">🌐 BM/EN</button>
-        <button class="btn btn-secondary" onclick="location.href='workshop.html'">🧰 Workshop</button>
-        <button class="btn btn-dark" onclick="logout()">Log Keluar</button>
+
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="toggleLanguage(); renderDashboard();"
+        >
+          🌐 BM/EN
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="toggleFullscreen()"
+        >
+          ⛶ Skrin Penuh
+        </button>
+
+        <button
+          class="btn btn-dark"
+          type="button"
+          onclick="logout()"
+        >
+          Log Keluar
+        </button>
+
       </div>
+
     </header>
 
+
+    <!-- PROFILE -->
     <section class="profile-banner glass">
+
       <div class="profile-main">
-        <div id="profileAvatar" class="profile-avatar">👨‍💻</div>
-        <div>
-          <h2 id="profileName">Pelatih</h2>
-          <p id="profileId"></p>
-          <span id="profileRank" class="rank-pill">Trainee Technician</span>
+
+        <div
+          id="profileAvatar"
+          class="profile-avatar"
+        >
+          👨‍💻
         </div>
+
+        <div>
+
+          <h2 id="profileName">
+            Pelatih
+          </h2>
+
+          <p id="profileId">
+            -
+          </p>
+
+          <span
+            id="profileRank"
+            class="rank-pill"
+          >
+            Trainee Technician
+          </span>
+
+        </div>
+
       </div>
 
+
+      <!-- XP -->
       <div class="xp-block">
+
         <div class="xp-line">
-          <span>XP</span>
-          <b id="xpText">50 / 500</b>
+
+          <span>
+            XP
+          </span>
+
+          <b id="xpText">
+            50 / 500
+          </b>
+
         </div>
-        <div class="progress"><span id="xpBar"></span></div>
+
+        <div class="progress">
+          <span id="xpBar"></span>
+        </div>
+
       </div>
+
     </section>
 
+
+    <!-- STATISTICS -->
     <section class="stat-grid">
-      <article class="stat-card glass"><span>⭐</span><div><small>Level</small><b id="levelStat">1</b></div></article>
-      <article class="stat-card glass"><span>🪙</span><div><small>Coins</small><b id="coinStat">10</b></div></article>
-      <article class="stat-card glass"><span>🎯</span><div><small>Professional Score</small><b id="proStat">0%</b></div></article>
-      <article class="stat-card glass"><span>🏆</span><div><small>Badges</small><b id="badgeStat">1</b></div></article>
-    </section>
 
-    <section class="byte-panel glass">
-      <div class="byte-avatar">🤖</div>
-      <div>
-        <b>BYTE AI</b>
-        <p id="byteMessage">Selamat datang Technician. Tekan Mission 01 untuk bermula.</p>
-      </div>
-      <button class="btn btn-secondary" onclick="speakByte()">🔊</button>
-    </section>
+      <article class="stat-card glass">
 
-    <section class="missions-panel glass">
-      <div class="section-heading">
+        <span>
+          ⭐
+        </span>
+
         <div>
-          <p class="eyebrow">LEARNING PATH</p>
-          <h2 data-bm="Misi Pembelajaran" data-en="Learning Missions">Misi Pembelajaran</h2>
+          <small>
+            Level
+          </small>
+
+          <b id="levelStat">
+            1
+          </b>
         </div>
-        <div class="overall-progress">
-          <span data-bm="Kemajuan" data-en="Progress">Kemajuan</span>
-          <b id="overallProgress">0%</b>
+
+      </article>
+
+
+      <article class="stat-card glass">
+
+        <span>
+          🪙
+        </span>
+
+        <div>
+          <small>
+            Coins
+          </small>
+
+          <b id="coinStat">
+            10
+          </b>
         </div>
+
+      </article>
+
+
+      <article class="stat-card glass">
+
+        <span>
+          🎯
+        </span>
+
+        <div>
+          <small>
+            Professional Score
+          </small>
+
+          <b id="proStat">
+            0%
+          </b>
+        </div>
+
+      </article>
+
+
+      <article class="stat-card glass">
+
+        <span>
+          🏆
+        </span>
+
+        <div>
+          <small>
+            Badges
+          </small>
+
+          <b id="badgeStat">
+            1
+          </b>
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- BYTE AI -->
+    <section class="byte-panel glass">
+
+      <div class="byte-avatar">
+        🤖
       </div>
 
-      <div id="missionList" class="mission-list"></div>
+      <div>
+
+        <b>
+          BYTE AI
+        </b>
+
+        <p id="byteMessage">
+          Selamat datang. Tekan Mission 13 untuk bermula.
+        </p>
+
+      </div>
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="speakByte()"
+      >
+        🔊
+      </button>
+
     </section>
+
+
+    <!-- MISSIONS -->
+    <section class="missions-panel glass">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            LEARNING PATH
+          </p>
+
+          <h2
+            data-bm="Misi Pembelajaran"
+            data-en="Learning Missions"
+          >
+            Misi Pembelajaran
+          </h2>
+
+        </div>
+
+
+        <div class="overall-progress">
+
+          <span
+            data-bm="Kemajuan"
+            data-en="Progress"
+          >
+            Kemajuan
+          </span>
+
+          <b id="overallProgress">
+            0%
+          </b>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="missionList"
+        class="mission-list"
+      ></div>
+
+    </section>
+
   </div>
 
-  <script src="storage.js"></script>
-  <script src="language.js"></script>
-  <script src="missions.js"></script>
-  <script src="dashboard.js"></script>
+
+  <!-- FAIL JAVASCRIPT DENGAN CACHE VERSION -->
+  <script src="storage.js?v=20260803-20"></script>
+
+  <script src="language.js?v=20260803-20"></script>
+
+  <script src="missions.js?v=20260803-20"></script>
+
+  <script src="dashboard.js?v=20260803-20"></script>
+
+
+  <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+  </script>
+
 </body>
 </html>
