@@ -1,85 +1,722 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Login Pelatih - C01</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  >
+
+  <meta
+    http-equiv="Cache-Control"
+    content="no-cache, no-store, must-revalidate"
+  >
+
+  <meta
+    http-equiv="Pragma"
+    content="no-cache"
+  >
+
+  <meta
+    http-equiv="Expires"
+    content="0"
+  >
+
+  <title>Login Pelatih | KP13 dan KT13</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg-dark: #020712;
+      --bg-mid: #08243c;
+      --panel: #0d2f4c;
+      --panel-light: #123d5f;
+
+      --text: #ffffff;
+      --muted: #e7f0f7;
+
+      --blue: #38bdf8;
+      --orange: #fbbf24;
+      --green: #34d399;
+      --red: #fb7185;
+
+      --border: #5a86aa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      font-family: "Poppins", Arial, sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 10% 8%,
+          rgba(56, 189, 248, 0.18),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(251, 191, 36, 0.15),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          var(--bg-dark),
+          var(--bg-mid)
+        );
+
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    strong {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      min-height: 100vh;
+
+      display: grid;
+      place-items: center;
+
+      padding: 20px;
+    }
+
+    .login-card {
+      position: relative;
+      z-index: 10;
+
+      width: min(760px, 100%);
+
+      padding: 34px;
+
+      border: 2px solid var(--border);
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(18, 61, 95, 0.98),
+          rgba(7, 28, 46, 0.98)
+        );
+
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    .login-card::before,
+    .login-card::after {
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0;
+
+      color: #7dd3fc;
+
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 10px 0 4px;
+
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin-bottom: 26px;
+
+      color: var(--muted);
+
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .field-group {
+      position: relative;
+      z-index: 20;
+
+      margin-top: 18px;
+    }
+
+    .field-group label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #ffffff;
+
+      font-weight: 700;
+    }
+
+    input {
+      position: relative;
+      z-index: 30;
+
+      width: 100%;
+      min-height: 58px;
+
+      padding: 14px 16px;
+
+      border: 2px solid var(--border);
+      border-radius: 14px;
+
+      color: #ffffff;
+
+      background: #071c2e;
+
+      outline: none;
+
+      pointer-events: auto;
+      touch-action: manipulation;
+
+      -webkit-user-select: text;
+      user-select: text;
+
+      opacity: 1;
+      visibility: visible;
+
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: var(--orange);
+
+      box-shadow:
+        0 0 0 4px rgba(251, 191, 36, 0.18);
+    }
+
+    input::placeholder {
+      color: #b9c9d8;
+      opacity: 1;
+    }
+
+    fieldset {
+      position: relative;
+      z-index: 20;
+
+      margin-top: 22px;
+      padding: 18px;
+
+      border: 2px solid var(--border);
+      border-radius: 16px;
+    }
+
+    legend {
+      padding: 0 8px;
+
+      color: #ffffff;
+
+      font-weight: 800;
+    }
+
+    .avatar-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+      gap: 10px;
+    }
+
+    .avatar-button {
+      min-height: 66px;
+
+      border: 2px solid var(--border);
+      border-radius: 14px;
+
+      color: #ffffff;
+
+      background: var(--panel-light);
+
+      font-size: 2rem;
+    }
+
+    .avatar-button.selected {
+      border-color: var(--orange);
+
+      background: #1a4e76;
+
+      box-shadow:
+        0 0 0 4px rgba(251, 191, 36, 0.17);
+    }
+
+    .message {
+      min-height: 28px;
+
+      margin: 16px 0 0;
+
+      color: var(--red);
+
+      font-weight: 700;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      gap: 12px;
+
+      margin-top: 14px;
+    }
+
+    .primary-button,
+    .secondary-button {
+      width: 100%;
+      min-height: 58px;
+
+      border-radius: 15px;
+
+      padding: 14px 20px;
+
+      font-weight: 800;
+    }
+
+    .primary-button {
+      border: 0;
+
+      color: #111827;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fde68a,
+          var(--orange)
+        );
+    }
+
+    .secondary-button {
+      border: 2px solid #60a5fa;
+
+      color: #ffffff;
+
+      background: #1d4ed8;
+    }
+
+    .help-box {
+      margin-top: 20px;
+      padding: 15px;
+
+      border-left: 7px solid var(--green);
+      border-radius: 14px;
+
+      color: #ffffff;
+
+      background:
+        rgba(52, 211, 153, 0.12);
+
+      line-height: 1.6;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        display: block;
+        padding: 12px;
+      }
+
+      .login-card {
+        margin: 10px auto;
+        padding: 22px;
+      }
+
+      .avatar-grid {
+        grid-template-columns:
+          repeat(3, minmax(0, 1fr));
+      }
+
+      input {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="bg-grid"></div>
-  <main class="form-shell">
-    <section class="login-card glass">
-      <button class="back-link" onclick="location.href='index.html'">←</button>
+  <main class="page">
 
-      <p class="eyebrow">COMPUTER SYSTEM SET-UP</p>
-      <h1 data-bm="LOG MASUK PELATIH" data-en="STUDENT LOGIN">LOG MASUK PELATIH</h1>
+    <section class="login-card">
 
-      <label data-bm="Nama Pelatih" data-en="Student Name">Nama Pelatih</label>
-      <input id="studentName" class="field" autocomplete="name">
+      <p class="eyebrow">
+        COMPUTER SYSTEM SET-UP • C01
+      </p>
 
-      <label data-bm="No. Kad Pengenalan / ID" data-en="Identity Card / Student ID">No. Kad Pengenalan / ID</label>
-      <input id="studentId" class="field">
+      <h1>
+        LOGIN PELATIH
+      </h1>
 
-      <label data-bm="Pilih Avatar" data-en="Choose Avatar">Pilih Avatar</label>
-      <div class="avatar-grid" id="avatarGrid">
-        <button class="avatar active" data-avatar="👨‍💻">👨‍💻</button>
-        <button class="avatar" data-avatar="👩‍💻">👩‍💻</button>
-        <button class="avatar" data-avatar="🧑‍🔧">🧑‍🔧</button>
-        <button class="avatar" data-avatar="👷">👷</button>
-        <button class="avatar" data-avatar="🖥️">🖥️</button>
-        <button class="avatar" data-avatar="🚀">🚀</button>
+      <p class="subtitle">
+        Sila masukkan nama penuh dan ID pelatih sebelum memulakan KP13.
+      </p>
+
+      <form
+        id="loginForm"
+        autocomplete="on"
+        novalidate
+      >
+
+        <div class="field-group">
+
+          <label for="studentName">
+            Nama Penuh Pelatih
+          </label>
+
+          <input
+            id="studentName"
+            name="studentName"
+            type="text"
+            placeholder="Contoh: Ahmad Bin Ali"
+            autocomplete="name"
+            autocapitalize="words"
+            enterkeyhint="next"
+            inputmode="text"
+            required
+          >
+
+        </div>
+
+        <div class="field-group">
+
+          <label for="studentId">
+            ID Pelatih / No. Kad Pengenalan
+          </label>
+
+          <input
+            id="studentId"
+            name="studentId"
+            type="text"
+            placeholder="Masukkan ID pelatih"
+            autocomplete="off"
+            autocapitalize="characters"
+            enterkeyhint="done"
+            inputmode="text"
+            required
+          >
+
+        </div>
+
+        <fieldset>
+
+          <legend>
+            Pilih Avatar
+          </legend>
+
+          <div class="avatar-grid">
+
+            <button
+              class="avatar-button selected"
+              type="button"
+              data-avatar="🧑‍💻"
+              aria-label="Avatar juruteknik lelaki"
+            >
+              🧑‍💻
+            </button>
+
+            <button
+              class="avatar-button"
+              type="button"
+              data-avatar="👩‍💻"
+              aria-label="Avatar juruteknik wanita"
+            >
+              👩‍💻
+            </button>
+
+            <button
+              class="avatar-button"
+              type="button"
+              data-avatar="🧑‍🔧"
+              aria-label="Avatar mekanik lelaki"
+            >
+              🧑‍🔧
+            </button>
+
+            <button
+              class="avatar-button"
+              type="button"
+              data-avatar="👩‍🔧"
+              aria-label="Avatar mekanik wanita"
+            >
+              👩‍🔧
+            </button>
+
+            <button
+              class="avatar-button"
+              type="button"
+              data-avatar="🤖"
+              aria-label="Avatar robot"
+            >
+              🤖
+            </button>
+
+            <button
+              class="avatar-button"
+              type="button"
+              data-avatar="🦸"
+              aria-label="Avatar hero"
+            >
+              🦸
+            </button>
+
+          </div>
+
+        </fieldset>
+
+        <p
+          id="loginMessage"
+          class="message"
+          aria-live="polite"
+        ></p>
+
+        <div class="button-row">
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            SIMPAN DAN MASUK DASHBOARD
+          </button>
+
+          <button
+            class="secondary-button"
+            type="button"
+            onclick="window.location.href='index.html'"
+          >
+            KEMBALI KE HALAMAN UTAMA
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="help-box">
+        📱 Ruangan login ini menyokong iPhone, iPad, tablet Samsung,
+        telefon Android dan komputer.
       </div>
 
-      <button class="btn btn-primary full" onclick="saveStudent()">
-        <span data-bm="MASUK DASHBOARD" data-en="ENTER DASHBOARD">MASUK DASHBOARD</span>
-      </button>
-
-      <button class="btn btn-secondary full" onclick="toggleLanguage()">🌐 BM / EN</button>
     </section>
+
   </main>
 
-  <script src="storage.js"></script>
-  <script src="language.js"></script>
+  <script src="storage.js?v=20260803"></script>
+
   <script>
-    let selectedAvatar = '👨‍💻';
+    let selectedAvatar = "🧑‍💻";
 
-    document.querySelectorAll('.avatar').forEach(button => {
-      button.addEventListener('click', () => {
-        document.querySelectorAll('.avatar').forEach(x => x.classList.remove('active'));
-        button.classList.add('active');
-        selectedAvatar = button.dataset.avatar;
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        initialiseAvatarButtons();
+        restoreExistingProfile();
+
+        document
+          .getElementById("studentName")
+          .focus();
+      }
+    );
+
+    function initialiseAvatarButtons() {
+      const buttons =
+        document.querySelectorAll(
+          ".avatar-button"
+        );
+
+      buttons.forEach(function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            buttons.forEach(function (item) {
+              item.classList.remove(
+                "selected"
+              );
+            });
+
+            button.classList.add(
+              "selected"
+            );
+
+            selectedAvatar =
+              button.dataset.avatar;
+          }
+        );
       });
-    });
+    }
 
-    function saveStudent(){
-      const name = document.getElementById('studentName').value.trim();
-      const id = document.getElementById('studentId').value.trim();
+    function restoreExistingProfile() {
+      try {
+        if (
+          typeof C01Storage === "undefined"
+        ) {
+          return;
+        }
 
-      if(!name || !id){
-        alert(currentLanguage() === 'en' ? 'Please complete all fields.' : 'Sila lengkapkan semua ruangan.');
+        const existing =
+          C01Storage.loadProfile();
+
+        if (!existing) {
+          return;
+        }
+
+        document
+          .getElementById("studentName")
+          .value =
+          existing.name || "";
+
+        document
+          .getElementById("studentId")
+          .value =
+          existing.id || "";
+
+        selectedAvatar =
+          existing.avatar || "🧑‍💻";
+
+        document
+          .querySelectorAll(
+            ".avatar-button"
+          )
+          .forEach(function (button) {
+            button.classList.toggle(
+              "selected",
+              button.dataset.avatar ===
+                selectedAvatar
+            );
+          });
+      } catch (error) {
+        console.log(
+          "Profil lama tidak dapat dibaca."
+        );
+      }
+    }
+
+    document
+      .getElementById("loginForm")
+      .addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault();
+
+          saveStudentLogin();
+        }
+      );
+
+    function saveStudentLogin() {
+      const nameInput =
+        document.getElementById(
+          "studentName"
+        );
+
+      const idInput =
+        document.getElementById(
+          "studentId"
+        );
+
+      const message =
+        document.getElementById(
+          "loginMessage"
+        );
+
+      const name =
+        nameInput.value.trim();
+
+      const id =
+        idInput.value.trim();
+
+      message.textContent = "";
+
+      if (!name) {
+        message.textContent =
+          "Sila masukkan nama penuh pelatih.";
+
+        nameInput.focus();
         return;
       }
 
-      const existing = C01Storage.loadProfile();
+      if (!id) {
+        message.textContent =
+          "Sila masukkan ID pelatih.";
 
-      const profile = existing && existing.id === id ? existing : C01Storage.createProfile({
-        name,
-        id,
-        avatar: selectedAvatar,
-        language: currentLanguage()
-      });
+        idInput.focus();
+        return;
+      }
 
-      profile.name = name;
-      profile.id = id;
-      profile.avatar = selectedAvatar;
-      profile.language = currentLanguage();
+      if (
+        typeof C01Storage === "undefined"
+      ) {
+        message.textContent =
+          "Fail storage.js tidak dapat dimuatkan.";
 
-      C01Storage.saveProfile(profile);
-      location.href = 'dashboard.html';
+        return;
+      }
+
+      try {
+        const existing =
+          C01Storage.loadProfile();
+
+        let profile;
+
+        if (existing) {
+          profile = {
+            ...existing,
+            name: name,
+            id: id,
+            avatar: selectedAvatar,
+            updatedAt:
+              new Date().toISOString()
+          };
+        } else {
+          profile =
+            C01Storage.createProfile({
+              name: name,
+              id: id,
+              avatar: selectedAvatar,
+              language: "ms"
+            });
+        }
+
+        C01Storage.saveProfile(profile);
+
+        window.location.href =
+          "dashboard.html";
+      } catch (error) {
+        console.error(error);
+
+        message.textContent =
+          "Profil tidak dapat disimpan. Sila cuba semula.";
+      }
     }
   </script>
 </body>
