@@ -1,21 +1,81 @@
 <!DOCTYPE html>
-<html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard Guru C01</title><link rel="stylesheet" href="style.css?v=1"></head>
-<body><main class="page">
-<header class="panel header"><div><p class="eyebrow">TEACHER MODULE • C01</p><h1>DASHBOARD PEGAWAI PENILAI</h1><p id="teacherGreeting" class="muted"></p></div>
-<div class="actions"><button onclick="location.href='penilaian.html'">PENILAIAN</button><button onclick="location.href='laporan.html'">LAPORAN</button><button onclick="location.href='tetapan.html'">TETAPAN</button><button class="danger" onclick="logoutTeacher()">LOG KELUAR</button></div></header>
-<section class="stats-grid"><article class="stat-card"><span>Pelatih Dikesan</span><strong id="studentCount">0</strong></article><article class="stat-card"><span>Menunggu</span><strong id="pendingCount">0</strong></article><article class="stat-card"><span>Terampil</span><strong id="competentCount">0</strong></article><article class="stat-card"><span>Belum Terampil</span><strong id="notCompetentCount">0</strong></article></section>
-<section class="panel"><div class="section-head"><div><p class="eyebrow">RINGKASAN</p><h2>STATUS KT13, KT14 DAN KT15</h2></div><button onclick="refreshDashboard()">MUAT SEMULA</button></div><div id="summaryTable"></div>
-<div class="warning-box">Modul ini membaca data localStorage pada peranti yang sama. Data pelatih daripada peranti lain tidak akan muncul tanpa Firebase atau pangkalan data.</div></section>
-</main><script src="teacher-storage.js?v=1"></script><script src="teacher.js?v=1"></script>
-<script>
-document.addEventListener("DOMContentLoaded",refreshDashboard);
-function refreshDashboard(){
- const teacher=C01TeacherStorage.requireSession();teacherGreeting.textContent=`Selamat datang, ${teacher.name}`;
- const r=C01TeacherStorage.collectAllRecords();
- studentCount.textContent=r.length;pendingCount.textContent=r.filter(x=>x.status==="MENUNGGU PENGESAHAN").length;
- competentCount.textContent=r.filter(x=>x.status==="TERAMPIL").length;notCompetentCount.textContent=r.filter(x=>x.status==="BELUM TERAMPIL").length;
- summaryTable.innerHTML=C01TeacherUI.renderRecordTable(r,false);
-}
-function logoutTeacher(){C01TeacherStorage.clearSession();location.href="login.html";}
-</script></body></html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Dashboard Guru Firebase C01</title>
+  <link rel="stylesheet" href="style.css?v=20260804-1">
+</head>
+<body>
+  <main class="page">
+    <header class="panel header">
+      <div>
+        <p class="eyebrow">FIREBASE REALTIME • C01</p>
+        <h1>DASHBOARD PEGAWAI PENILAI</h1>
+        <p id="teacherGreeting" class="muted"></p>
+      </div>
+
+      <div class="actions">
+        <button id="refreshButton" type="button">MUAT SEMULA</button>
+        <button id="csvButton" type="button">EXPORT CSV</button>
+        <button id="backupButton" type="button">BACKUP JSON</button>
+        <button id="pinButton" type="button">TUKAR PIN</button>
+        <button id="logoutButton" class="danger" type="button">LOG KELUAR</button>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span>Jumlah Pelatih</span>
+        <strong id="studentCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Menunggu Pengesahan</span>
+        <strong id="pendingCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Terampil</span>
+        <strong id="competentCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Belum Terampil</span>
+        <strong id="failedCount">0</strong>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">KEMAS KINI MASA NYATA</p>
+          <h2>MARKAH KT13, KT14 DAN KT15</h2>
+        </div>
+        <span id="connectionStatus" class="connection connecting">MENYAMBUNG...</span>
+      </div>
+
+      <div class="filter-grid">
+        <input id="searchInput" type="search" placeholder="Cari nama atau ID pelatih">
+        <select id="moduleFilter">
+          <option value="ALL">Semua Modul</option>
+          <option value="KT13">KT13</option>
+          <option value="KT14">KT14</option>
+          <option value="KT15">KT15</option>
+        </select>
+        <select id="statusFilter">
+          <option value="ALL">Semua Status</option>
+          <option value="MENUNGGU_PENGESAHAN">Menunggu Pengesahan</option>
+          <option value="TERAMPIL">Terampil</option>
+          <option value="BELUM_TERAMPIL">Belum Terampil</option>
+          <option value="BELUM_DINILAI">Belum Dinilai</option>
+        </select>
+      </div>
+
+      <div id="studentCards" class="student-list"></div>
+    </section>
+
+    <div id="toast" class="toast hidden"></div>
+  </main>
+
+  <script type="module" src="teacher-firebase.js?v=20260804-1"></script>
+</body>
+</html>
