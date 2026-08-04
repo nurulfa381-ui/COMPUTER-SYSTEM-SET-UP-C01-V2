@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login Pegawai Penilai C01</title><link rel="stylesheet" href="style.css?v=1"></head>
+<body><main class="center-page"><section class="panel login-panel">
+<p class="eyebrow">TEACHER MODULE • C01</p><h1>LOGIN PEGAWAI PENILAI</h1>
+<p class="muted">Masukkan nama dan PIN untuk membuka dashboard guru.</p>
+<label>Nama Pegawai Penilai<input id="teacherName" type="text" placeholder="Masukkan nama penuh"></label>
+<label>PIN Guru<input id="teacherPin" type="password" inputmode="numeric" placeholder="Masukkan PIN"></label>
+<p id="loginMessage" class="message"></p>
+<button class="primary full" onclick="loginTeacher()">LOG MASUK</button>
+<button class="secondary full" onclick="location.href='../index.html'">KEMBALI</button>
+<div class="info-box">PIN awal: <strong>1515</strong></div>
+</section></main>
+<script src="teacher-storage.js?v=1"></script>
+<script>
+function loginTeacher(){
+ const name=teacherName.value.trim(),pin=teacherPin.value.trim();
+ if(!name||!pin){loginMessage.textContent="Sila masukkan nama dan PIN.";return;}
+ if(!C01TeacherStorage.verifyPin(pin)){loginMessage.textContent="PIN tidak tepat.";return;}
+ C01TeacherStorage.setSession(name);location.href="dashboard.html";
+}
+</script></body></html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laporan C01</title><link rel="stylesheet" href="style.css?v=1"></head>
+<body><main class="page"><header class="panel header"><div><p class="eyebrow">TEACHER MODULE • C01</p><h1>LAPORAN PENILAIAN</h1></div>
+<div class="actions"><button onclick="location.href='dashboard.html'">DASHBOARD</button><button onclick="window.print()">CETAK</button><button onclick="C01TeacherStorage.exportCsv()">EXPORT CSV</button></div></header>
+<section class="panel"><div id="reportTable"></div></section></main>
+<script src="teacher-storage.js?v=1"></script><script src="teacher.js?v=1"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{C01TeacherStorage.requireSession();reportTable.innerHTML=C01TeacherUI.renderRecordTable(C01TeacherStorage.collectAllRecords(),false);});</script>
+</body></html>

@@ -1,0 +1,8 @@
+const C01TeacherUI={
+escape(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")},
+statusClass(s){if(s==="TERAMPIL")return"status competent";if(s==="MENUNGGU PENGESAHAN")return"status pending";if(s==="BELUM TERAMPIL")return"status failed";return"status neutral"},
+renderRecordTable(records,editable){
+ if(!records.length)return`<div class="empty-state"><h3>Tiada rekod pelatih</h3><p>Data hanya muncul pada peranti/pelayar yang sama.</p></div>`;
+ return`<div class="table-wrap"><table><thead><tr><th>Modul</th><th>Pelatih</th><th>ID</th><th>Percubaan</th><th>Sementara</th><th>Rasmi</th><th>Status</th>${editable?"<th>Tindakan</th>":""}</tr></thead><tbody>${records.map(r=>`<tr><td>${this.escape(r.module)}</td><td>${this.escape(r.avatar)} ${this.escape(r.name)}</td><td>${this.escape(r.id)}</td><td>${r.attempts}</td><td>${r.temporaryScore}${r.temporaryScore!=="-"?"%":""}</td><td>${r.officialScore}${r.officialScore!=="-"?"%":""}</td><td><span class="${this.statusClass(r.status)}">${r.status}</span></td>${editable?`<td><div class="mark-actions"><input id="score_${r.storageKey}_${r.missionId}" type="number" min="0" max="100" value="${r.officialScore!=="-"?r.officialScore:r.temporaryScore!=="-"?r.temporaryScore:0}"><button onclick="approveMark('${r.storageKey}',${r.missionId})">SAHKAN</button><button class="danger" onclick="reopenMark('${r.storageKey}',${r.missionId})">BUKA SEMULA</button></div></td>`:""}</tr>`).join("")}</tbody></table></div>`;
+}
+};

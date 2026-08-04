@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tetapan Guru C01</title><link rel="stylesheet" href="style.css?v=1"></head>
+<body><main class="center-page"><section class="panel login-panel"><p class="eyebrow">TEACHER MODULE • C01</p><h1>TETAPAN GURU</h1>
+<label>PIN Lama<input id="oldPin" type="password"></label><label>PIN Baharu<input id="newPin" type="password"></label><label>Ulang PIN Baharu<input id="confirmPin" type="password"></label>
+<p id="settingMessage" class="message"></p>
+<button class="primary full" onclick="changePin()">TUKAR PIN</button><button class="secondary full" onclick="C01TeacherStorage.downloadBackup()">BACKUP JSON</button><button class="danger full" onclick="resetData()">RESET DATA TEMPATAN</button><button class="secondary full" onclick="location.href='dashboard.html'">KEMBALI</button>
+</section></main><script src="teacher-storage.js?v=1"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>C01TeacherStorage.requireSession());
+function changePin(){if(!C01TeacherStorage.verifyPin(oldPin.value)){settingMessage.textContent="PIN lama tidak tepat.";return;}if(newPin.value.length<4){settingMessage.textContent="PIN baharu minimum 4 aksara.";return;}if(newPin.value!==confirmPin.value){settingMessage.textContent="PIN tidak sepadan.";return;}C01TeacherStorage.setPin(newPin.value);settingMessage.textContent="PIN berjaya ditukar.";}
+function resetData(){if(confirm("Padam rekod C01 pada peranti ini?")){C01TeacherStorage.resetLocalRecords();alert("Rekod dipadam.");}}
+</script></body></html>

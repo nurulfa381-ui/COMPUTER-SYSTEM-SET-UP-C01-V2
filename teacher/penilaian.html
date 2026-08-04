@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Penilaian C01</title><link rel="stylesheet" href="style.css?v=1"></head>
+<body><main class="page"><header class="panel header"><div><p class="eyebrow">TEACHER MODULE • C01</p><h1>PENGESAHAN MARKAH</h1></div>
+<div class="actions"><button onclick="location.href='dashboard.html'">DASHBOARD</button><button onclick="loadAssessment()">MUAT SEMULA</button></div></header>
+<section class="panel"><div id="assessmentTable"></div></section></main>
+<script src="teacher-storage.js?v=1"></script><script src="teacher.js?v=1"></script>
+<script>
+document.addEventListener("DOMContentLoaded",loadAssessment);
+function loadAssessment(){C01TeacherStorage.requireSession();assessmentTable.innerHTML=C01TeacherUI.renderRecordTable(C01TeacherStorage.collectAllRecords(),true);}
+function approveMark(k,m){const r=C01TeacherStorage.getRecord(k,m);if(!r)return alert("Rekod tidak dijumpai.");const s=Number(document.getElementById(`score_${k}_${m}`).value);if(!Number.isFinite(s)||s<0||s>100)return alert("Markah mesti 0 hingga 100.");const t=C01TeacherStorage.requireSession();C01TeacherStorage.approveMark(k,m,{score:s,assessor:t.name});alert("Markah rasmi disahkan.");loadAssessment();}
+function reopenMark(k,m){if(confirm("Buka semula markah rasmi ini?")){C01TeacherStorage.reopenMark(k,m);loadAssessment();}}
+</script></body></html>
