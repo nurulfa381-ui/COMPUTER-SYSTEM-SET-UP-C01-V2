@@ -2,120 +2,360 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>KT13 - Konfigurasi Storan Komputer</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=5"
+  >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta
+    http-equiv="Cache-Control"
+    content="no-cache, no-store, must-revalidate"
+  >
+
+  <meta
+    http-equiv="Pragma"
+    content="no-cache"
+  >
+
+  <meta
+    http-equiv="Expires"
+    content="0"
+  >
+
+  <title>KT13 - Pengujian Sistem Komputer</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="style.css?v=1">
+  <link
+    rel="stylesheet"
+    href="style.css?v=20260804-kt13"
+  >
 </head>
 
 <body>
+
   <main class="kt-page">
 
-    <header class="panel header-panel">
+    <!-- HEADER -->
+    <header class="kt-header">
+
       <div>
-        <p class="eyebrow">IT-020-3:2013-C01/KT(13/15)</p>
-        <h1>KT13: KONFIGURASI STORAN KOMPUTER</h1>
-        <p>20 soalan • Markah penuh 100 • Lulus 60%</p>
+
+        <p class="eyebrow">
+          IT-020-3:2013-C01/KT(13/15)
+        </p>
+
+        <h1>
+          PENGUJIAN SISTEM KOMPUTER
+        </h1>
+
+        <p class="subtitle">
+          Jawab semua bahagian. Markah lulus minimum ialah 60%.
+        </p>
+
       </div>
 
-      <button class="secondary-button" onclick="location.href='../../kp/kp13/index.html'">
-        ← Kembali KP13
-      </button>
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="window.location.href='../../kp/kp13/index.html'"
+        >
+          KEMBALI KP13
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="toggleFullscreen()"
+        >
+          SKRIN PENUH
+        </button>
+
+      </div>
+
     </header>
 
-    <section class="panel candidate-panel">
-      <div>
-        <span>Nama Pelatih</span>
-        <strong id="candidateName">-</strong>
-      </div>
 
-      <div>
-        <span>ID Pelatih</span>
-        <strong id="candidateId">-</strong>
-      </div>
+    <!-- MAKLUMAT PELATIH -->
+    <section class="candidate-panel">
 
-      <div>
-        <span>Percubaan</span>
-        <strong id="attemptNumber">1</strong>
-      </div>
+      <article class="candidate-card">
 
-      <div>
-        <span>Status</span>
-        <strong id="assessmentStatus">BELUM DINILAI</strong>
-      </div>
+        <span>
+          Nama Pelatih
+        </span>
+
+        <strong id="candidateName">
+          -
+        </strong>
+
+      </article>
+
+      <article class="candidate-card">
+
+        <span>
+          ID Pelatih
+        </span>
+
+        <strong id="candidateId">
+          -
+        </strong>
+
+      </article>
+
+      <article class="candidate-card">
+
+        <span>
+          Percubaan
+        </span>
+
+        <strong id="attemptNumber">
+          1
+        </strong>
+
+      </article>
+
+      <article class="candidate-card">
+
+        <span>
+          Status Penilaian
+        </span>
+
+        <strong
+          id="assessmentStatus"
+          class="neutral"
+        >
+          BELUM DINILAI
+        </strong>
+
+      </article>
+
     </section>
 
-    <section class="panel">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">BAHAGIAN A</p>
-          <h2>Pilihan Berganda</h2>
-        </div>
 
-        <span class="section-score">10 soalan × 5 markah</span>
+    <!-- ARAHAN -->
+    <section class="instruction-panel">
+
+      <div class="byte-avatar">
+        🤖
       </div>
 
-      <div id="mcqContainer"></div>
+      <div>
+
+        <strong>
+          BYTE AI
+        </strong>
+
+        <p>
+          Lengkapkan semua soalan objektif, padanan dan susunan langkah.
+          Pilihan jawapan diacak secara automatik.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="speakInstruction()"
+      >
+        🔊 DENGAR
+      </button>
+
     </section>
 
-    <section class="panel">
+
+    <!-- BAHAGIAN A -->
+    <section class="assessment-section">
+
       <div class="section-heading">
+
         <div>
-          <p class="eyebrow">BAHAGIAN B</p>
-          <h2>Padanan</h2>
+
+          <p class="eyebrow">
+            BAHAGIAN A
+          </p>
+
+          <h2>
+            SOALAN OBJEKTIF
+          </h2>
+
         </div>
 
-        <span class="section-score">5 soalan × 5 markah</span>
+        <span class="mark-badge">
+          50 MARKAH
+        </span>
+
       </div>
 
       <p>
-        Pilihan jawapan diacak setiap kali KT dibuka.
+        Pilih satu jawapan yang paling tepat bagi setiap soalan.
+      </p>
+
+      <div id="mcqContainer"></div>
+
+    </section>
+
+
+    <!-- BAHAGIAN B -->
+    <section class="assessment-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            BAHAGIAN B
+          </p>
+
+          <h2>
+            SOALAN PADANAN
+          </h2>
+
+        </div>
+
+        <span class="mark-badge">
+          25 MARKAH
+        </span>
+
+      </div>
+
+      <p>
+        Padankan istilah dengan fungsi atau penerangan yang betul.
       </p>
 
       <div id="matchingContainer"></div>
+
     </section>
 
-    <section class="panel">
+
+    <!-- BAHAGIAN C -->
+    <section class="assessment-section">
+
       <div class="section-heading">
+
         <div>
-          <p class="eyebrow">BAHAGIAN C</p>
-          <h2>Susunan Langkah</h2>
+
+          <p class="eyebrow">
+            BAHAGIAN C
+          </p>
+
+          <h2>
+            SUSUN LANGKAH
+          </h2>
+
         </div>
 
-        <span class="section-score">5 langkah × 5 markah</span>
+        <span class="mark-badge">
+          25 MARKAH
+        </span>
+
       </div>
 
       <p>
-        Susun langkah konfigurasi storan mengikut urutan sebenar.
+        Susun langkah pemasangan dan pengujian pemacu mengikut urutan yang tepat.
+        Gunakan butang atas dan bawah atau seret pada peranti yang menyokongnya.
       </p>
 
-      <div id="sequenceContainer" class="sequence-list"></div>
+      <div id="sequenceContainer"></div>
+
     </section>
 
-    <footer class="panel footer-panel">
-      <button id="submitButton" class="primary-button" onclick="submitKT13()">
+
+    <!-- HANTAR -->
+    <section class="submit-panel">
+
+      <button
+        id="submitButton"
+        type="button"
+        class="btn btn-primary submit-button"
+        onclick="submitKT13()"
+      >
         HANTAR JAWAPAN
       </button>
 
-      <button class="secondary-button" onclick="location.href='../../dashboard.html'">
-        Dashboard
+      <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="window.location.href='../../dashboard.html'"
+      >
+        DASHBOARD
       </button>
 
-      <div id="resultPanel"></div>
-    </footer>
+    </section>
+
+
+    <!-- KEPUTUSAN -->
+    <section
+      id="resultPanel"
+      class="result-panel"
+    ></section>
 
   </main>
 
-  <script src="../../storage.js?v=1"></script>
-  <script src="script.js?v=1"></script>
+
+  <!-- STORAGE ASAL PROJEK -->
+  <script
+    src="../../storage.js?v=20260804-kt13"
+  ></script>
+
+  <!-- SCRIPT KT13 ASAL -->
+  <script
+    src="script.js?v=20260804-kt13"
+  ></script>
+
+  <!-- FIREBASE SYNC OVERLAY -->
+  <script
+    type="module"
+    src="../../firebase-sync.js?v=20260804-1"
+  ></script>
+
+
+  <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+
+    function speakInstruction() {
+      if (!("speechSynthesis" in window)) {
+        return;
+      }
+
+      speechSynthesis.cancel();
+
+      const utterance =
+        new SpeechSynthesisUtterance(
+          "Lengkapkan semua soalan objektif, padanan dan susunan langkah. Pilihan jawapan diacak secara automatik."
+        );
+
+      utterance.lang = "ms-MY";
+      utterance.rate = 0.88;
+
+      speechSynthesis.speak(
+        utterance
+      );
+    }
+  </script>
+
 </body>
 </html>
