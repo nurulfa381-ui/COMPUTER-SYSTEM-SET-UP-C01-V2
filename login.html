@@ -5,7 +5,7 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=5"
+    content="width=device-width, initial-scale=1.0, maximum-scale=5"
   >
 
   <meta
@@ -23,7 +23,7 @@
     content="0"
   >
 
-  <title>Login Pelatih | KP13 dan KT13</title>
+  <title>Login Pelatih C01 – KP13 & KT13</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -40,15 +40,12 @@
       --bg-mid: #08243c;
       --panel: #0d2f4c;
       --panel-light: #123d5f;
-
       --text: #ffffff;
       --muted: #e7f0f7;
-
       --blue: #38bdf8;
       --orange: #fbbf24;
       --green: #34d399;
       --red: #fb7185;
-
       --border: #5a86aa;
     }
 
@@ -57,7 +54,6 @@
     }
 
     html {
-      scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
     }
 
@@ -66,7 +62,6 @@
       min-height: 100vh;
 
       font-family: "Poppins", Arial, sans-serif;
-
       color: var(--text);
 
       background:
@@ -85,8 +80,6 @@
           var(--bg-dark),
           var(--bg-mid)
         );
-
-      overflow-x: hidden;
     }
 
     h1,
@@ -109,19 +102,13 @@
 
     .page {
       min-height: 100vh;
-
       display: grid;
       place-items: center;
-
       padding: 20px;
     }
 
     .login-card {
-      position: relative;
-      z-index: 10;
-
       width: min(760px, 100%);
-
       padding: 34px;
 
       border: 2px solid var(--border);
@@ -138,70 +125,47 @@
         0 28px 80px rgba(0, 0, 0, 0.45);
     }
 
-    .login-card::before,
-    .login-card::after {
-      pointer-events: none;
-    }
-
     .eyebrow {
       margin: 0;
-
       color: #7dd3fc;
-
-      font-size: 0.95rem;
       font-weight: 800;
       letter-spacing: 0.12em;
     }
 
     h1 {
       margin: 10px 0 4px;
-
       font-size: clamp(2.5rem, 6vw, 5rem);
       line-height: 1.05;
     }
 
     .subtitle {
       margin-bottom: 26px;
-
       color: var(--muted);
-
       font-size: 1.1rem;
       line-height: 1.6;
     }
 
     .field-group {
-      position: relative;
-      z-index: 20;
-
       margin-top: 18px;
     }
 
     .field-group label {
       display: block;
-
       margin-bottom: 8px;
-
       color: #ffffff;
-
       font-weight: 700;
     }
 
     input {
-      position: relative;
-      z-index: 30;
-
       width: 100%;
       min-height: 58px;
-
       padding: 14px 16px;
 
       border: 2px solid var(--border);
       border-radius: 14px;
 
       color: #ffffff;
-
       background: #071c2e;
-
       outline: none;
 
       pointer-events: auto;
@@ -209,9 +173,6 @@
 
       -webkit-user-select: text;
       user-select: text;
-
-      opacity: 1;
-      visibility: visible;
 
       font-size: 16px;
     }
@@ -229,9 +190,6 @@
     }
 
     fieldset {
-      position: relative;
-      z-index: 20;
-
       margin-top: 22px;
       padding: 18px;
 
@@ -241,9 +199,7 @@
 
     legend {
       padding: 0 8px;
-
       color: #ffffff;
-
       font-weight: 800;
     }
 
@@ -262,7 +218,6 @@
       border-radius: 14px;
 
       color: #ffffff;
-
       background: var(--panel-light);
 
       font-size: 2rem;
@@ -270,7 +225,6 @@
 
     .avatar-button.selected {
       border-color: var(--orange);
-
       background: #1a4e76;
 
       box-shadow:
@@ -278,21 +232,26 @@
     }
 
     .message {
-      min-height: 28px;
-
+      min-height: 30px;
       margin: 16px 0 0;
-
-      color: var(--red);
-
       font-weight: 700;
+    }
+
+    .message.error {
+      color: var(--red);
+    }
+
+    .message.success {
+      color: var(--green);
+    }
+
+    .message.loading {
+      color: var(--orange);
     }
 
     .button-row {
       display: grid;
-      grid-template-columns: 1fr;
-
       gap: 12px;
-
       margin-top: 14px;
     }
 
@@ -302,7 +261,6 @@
       min-height: 58px;
 
       border-radius: 15px;
-
       padding: 14px 20px;
 
       font-weight: 800;
@@ -310,7 +268,6 @@
 
     .primary-button {
       border: 0;
-
       color: #111827;
 
       background:
@@ -321,15 +278,18 @@
         );
     }
 
+    .primary-button:disabled {
+      cursor: wait;
+      opacity: 0.7;
+    }
+
     .secondary-button {
       border: 2px solid #60a5fa;
-
       color: #ffffff;
-
       background: #1d4ed8;
     }
 
-    .help-box {
+    .firebase-status {
       margin-top: 20px;
       padding: 15px;
 
@@ -359,10 +319,6 @@
         grid-template-columns:
           repeat(3, minmax(0, 1fr));
       }
-
-      input {
-        font-size: 16px;
-      }
     }
   </style>
 </head>
@@ -381,7 +337,8 @@
       </h1>
 
       <p class="subtitle">
-        Sila masukkan nama penuh dan ID pelatih sebelum memulakan KP13.
+        Masukkan nama penuh dan ID pelatih sebelum memulakan
+        KP13 dan KT13.
       </p>
 
       <form
@@ -442,7 +399,6 @@
               class="avatar-button selected"
               type="button"
               data-avatar="🧑‍💻"
-              aria-label="Avatar juruteknik lelaki"
             >
               🧑‍💻
             </button>
@@ -451,7 +407,6 @@
               class="avatar-button"
               type="button"
               data-avatar="👩‍💻"
-              aria-label="Avatar juruteknik wanita"
             >
               👩‍💻
             </button>
@@ -460,7 +415,6 @@
               class="avatar-button"
               type="button"
               data-avatar="🧑‍🔧"
-              aria-label="Avatar mekanik lelaki"
             >
               🧑‍🔧
             </button>
@@ -469,7 +423,6 @@
               class="avatar-button"
               type="button"
               data-avatar="👩‍🔧"
-              aria-label="Avatar mekanik wanita"
             >
               👩‍🔧
             </button>
@@ -478,7 +431,6 @@
               class="avatar-button"
               type="button"
               data-avatar="🤖"
-              aria-label="Avatar robot"
             >
               🤖
             </button>
@@ -487,7 +439,6 @@
               class="avatar-button"
               type="button"
               data-avatar="🦸"
-              aria-label="Avatar hero"
             >
               🦸
             </button>
@@ -505,6 +456,7 @@
         <div class="button-row">
 
           <button
+            id="loginButton"
             class="primary-button"
             type="submit"
           >
@@ -523,29 +475,53 @@
 
       </form>
 
-      <div class="help-box">
-        📱 Ruangan login ini menyokong iPhone, iPad, tablet Samsung,
-        telefon Android dan komputer.
+      <div class="firebase-status">
+        ☁️ Nama dan ID pelatih akan dihantar ke Firebase supaya
+        Pegawai Penilai boleh melihat rekod daripada peranti lain.
       </div>
 
     </section>
 
   </main>
 
-  <script src="storage.js?v=20260803"></script>
+  <script type="module">
+    import {
+      db,
+      ensureFirebaseLogin,
+      serverTimestamp
+    } from "./firebase-config.js?v=20260804-1";
 
-  <script>
-    let selectedAvatar = "🧑‍💻";
+    import {
+      doc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+    const LOCAL_PROFILE_KEY =
+      "c01_student_profile";
+
+    let selectedAvatar =
+      "🧑‍💻";
+
+    const loginForm =
+      document.getElementById(
+        "loginForm"
+      );
+
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+    const loginMessage =
+      document.getElementById(
+        "loginMessage"
+      );
 
     document.addEventListener(
       "DOMContentLoaded",
       function () {
         initialiseAvatarButtons();
-        restoreExistingProfile();
-
-        document
-          .getElementById("studentName")
-          .focus();
+        restoreLocalProfile();
       }
     );
 
@@ -576,33 +552,35 @@
       });
     }
 
-    function restoreExistingProfile() {
+    function restoreLocalProfile() {
       try {
-        if (
-          typeof C01Storage === "undefined"
-        ) {
-          return;
-        }
+        const profile =
+          JSON.parse(
+            localStorage.getItem(
+              LOCAL_PROFILE_KEY
+            ) || "null"
+          );
 
-        const existing =
-          C01Storage.loadProfile();
-
-        if (!existing) {
+        if (!profile) {
           return;
         }
 
         document
-          .getElementById("studentName")
+          .getElementById(
+            "studentName"
+          )
           .value =
-          existing.name || "";
+          profile.name || "";
 
         document
-          .getElementById("studentId")
+          .getElementById(
+            "studentId"
+          )
           .value =
-          existing.id || "";
+          profile.id || "";
 
         selectedAvatar =
-          existing.avatar || "🧑‍💻";
+          profile.avatar || "🧑‍💻";
 
         document
           .querySelectorAll(
@@ -616,107 +594,321 @@
             );
           });
       } catch (error) {
-        console.log(
-          "Profil lama tidak dapat dibaca."
+        console.error(
+          "Profil tempatan tidak dapat dibaca:",
+          error
         );
       }
     }
 
-    document
-      .getElementById("loginForm")
-      .addEventListener(
-        "submit",
-        function (event) {
-          event.preventDefault();
+    loginForm.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
 
-          saveStudentLogin();
-        }
-      );
+        await loginStudent();
+      }
+    );
 
-    function saveStudentLogin() {
-      const nameInput =
-        document.getElementById(
-          "studentName"
-        );
-
-      const idInput =
-        document.getElementById(
-          "studentId"
-        );
-
-      const message =
-        document.getElementById(
-          "loginMessage"
-        );
-
+    async function loginStudent() {
       const name =
-        nameInput.value.trim();
+        document
+          .getElementById(
+            "studentName"
+          )
+          .value
+          .trim();
 
-      const id =
-        idInput.value.trim();
+      const studentId =
+        document
+          .getElementById(
+            "studentId"
+          )
+          .value
+          .trim();
 
-      message.textContent = "";
+      clearMessage();
 
       if (!name) {
-        message.textContent =
-          "Sila masukkan nama penuh pelatih.";
+        showMessage(
+          "Sila masukkan nama penuh pelatih.",
+          "error"
+        );
 
-        nameInput.focus();
+        document
+          .getElementById(
+            "studentName"
+          )
+          .focus();
+
         return;
       }
 
-      if (!id) {
-        message.textContent =
-          "Sila masukkan ID pelatih.";
+      if (!studentId) {
+        showMessage(
+          "Sila masukkan ID pelatih.",
+          "error"
+        );
 
-        idInput.focus();
+        document
+          .getElementById(
+            "studentId"
+          )
+          .focus();
+
         return;
+      }
+
+      setLoading(true);
+
+      try {
+        showMessage(
+          "Sedang menyambung ke Firebase...",
+          "loading"
+        );
+
+        const firebaseUser =
+          await ensureFirebaseLogin();
+
+        const previousProfile =
+          readLocalProfile();
+
+        const localProfile = {
+          name,
+          id: studentId,
+          avatar: selectedAvatar,
+          language: "ms",
+
+          xp:
+            Number(
+              previousProfile?.xp || 50
+            ),
+
+          coins:
+            Number(
+              previousProfile?.coins || 0
+            ),
+
+          unlocked:
+            Math.max(
+              Number(
+                previousProfile?.unlocked || 13
+              ),
+              13
+            ),
+
+          completed:
+            Array.isArray(
+              previousProfile?.completed
+            )
+              ? previousProfile.completed
+              : [],
+
+          scores:
+            previousProfile?.scores || {},
+
+          attempts:
+            previousProfile?.attempts || {},
+
+          pendingAssessments:
+            previousProfile
+              ?.pendingAssessments || {},
+
+          officialMarks:
+            previousProfile
+              ?.officialMarks || {},
+
+          badges:
+            Array.isArray(
+              previousProfile?.badges
+            )
+              ? previousProfile.badges
+              : ["first-login"],
+
+          firebaseUid:
+            firebaseUser.uid,
+
+          updatedAt:
+            new Date().toISOString()
+        };
+
+        localStorage.setItem(
+          LOCAL_PROFILE_KEY,
+          JSON.stringify(
+            localProfile
+          )
+        );
+
+        await setDoc(
+          doc(
+            db,
+            "students",
+            firebaseUser.uid
+          ),
+          {
+            uid:
+              firebaseUser.uid,
+
+            name,
+            studentId,
+            avatar:
+              selectedAvatar,
+
+            module:
+              "C01",
+
+            currentMission:
+              13,
+
+            repository:
+              "COMPUTER-SYSTEM-SET-UP-C01-V2",
+
+            xp:
+              localProfile.xp,
+
+            coins:
+              localProfile.coins,
+
+            device:
+              getDeviceType(),
+
+            browser:
+              navigator.userAgent,
+
+            lastLogin:
+              serverTimestamp(),
+
+            updatedAt:
+              serverTimestamp()
+          },
+          {
+            merge: true
+          }
+        );
+
+        showMessage(
+          "Login berjaya. Membuka dashboard...",
+          "success"
+        );
+
+        window.setTimeout(
+          function () {
+            window.location.href =
+              "dashboard.html";
+          },
+          600
+        );
+      } catch (error) {
+        console.error(
+          "Firebase login gagal:",
+          error
+        );
+
+        let message =
+          "Login Firebase gagal. Sila cuba semula.";
+
+        if (
+          error.code ===
+          "auth/operation-not-allowed"
+        ) {
+          message =
+            "Anonymous Authentication belum diaktifkan dalam Firebase.";
+        }
+
+        if (
+          error.code ===
+          "permission-denied"
+        ) {
+          message =
+            "Firestore Rules tidak membenarkan data disimpan.";
+        }
+
+        if (
+          error.code ===
+          "auth/network-request-failed"
+        ) {
+          message =
+            "Sambungan Internet bermasalah. Sila cuba semula.";
+        }
+
+        showMessage(
+          message,
+          "error"
+        );
+
+        setLoading(false);
+      }
+    }
+
+    function readLocalProfile() {
+      try {
+        return JSON.parse(
+          localStorage.getItem(
+            LOCAL_PROFILE_KEY
+          ) || "null"
+        );
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function getDeviceType() {
+      const agent =
+        navigator.userAgent.toLowerCase();
+
+      if (
+        agent.includes("ipad")
+      ) {
+        return "iPad";
       }
 
       if (
-        typeof C01Storage === "undefined"
+        agent.includes("iphone")
       ) {
-        message.textContent =
-          "Fail storage.js tidak dapat dimuatkan.";
-
-        return;
+        return "iPhone";
       }
 
-      try {
-        const existing =
-          C01Storage.loadProfile();
-
-        let profile;
-
-        if (existing) {
-          profile = {
-            ...existing,
-            name: name,
-            id: id,
-            avatar: selectedAvatar,
-            updatedAt:
-              new Date().toISOString()
-          };
-        } else {
-          profile =
-            C01Storage.createProfile({
-              name: name,
-              id: id,
-              avatar: selectedAvatar,
-              language: "ms"
-            });
-        }
-
-        C01Storage.saveProfile(profile);
-
-        window.location.href =
-          "dashboard.html";
-      } catch (error) {
-        console.error(error);
-
-        message.textContent =
-          "Profil tidak dapat disimpan. Sila cuba semula.";
+      if (
+        agent.includes("android") &&
+        !agent.includes("mobile")
+      ) {
+        return "Tablet Android";
       }
+
+      if (
+        agent.includes("android")
+      ) {
+        return "Telefon Android";
+      }
+
+      return "Komputer";
+    }
+
+    function showMessage(
+      message,
+      type
+    ) {
+      loginMessage.textContent =
+        message;
+
+      loginMessage.className =
+        `message ${type}`;
+    }
+
+    function clearMessage() {
+      loginMessage.textContent = "";
+      loginMessage.className =
+        "message";
+    }
+
+    function setLoading(isLoading) {
+      loginButton.disabled =
+        isLoading;
+
+      loginButton.textContent =
+        isLoading
+          ? "SEDANG MENYIMPAN..."
+          : "SIMPAN DAN MASUK DASHBOARD";
     }
   </script>
 </body>
