@@ -1,21 +1,13 @@
-PEMULIHAN INDEX.HTML C01 V2
+Gantikan fail:
+kt/kt13/script.js
 
-1. Buka repository:
-   COMPUTER-SYSTEM-SET-UP-C01-V2
+Keperluan di root repository:
+firebase-config.js
+firebase-storage.js
 
-2. Buka fail root:
-   index.html
-
-3. Padam semua kandungan lama.
-
-4. Gantikan dengan index.html dalam pakej ini.
-
-5. Commit:
-   Restore compatible C01 homepage
-
-Fail ini serasi dengan:
-- style.css sedia ada
-- storage.js sedia ada
-- login.html sedia ada
-- dashboard.html sedia ada
-- KP13 dan KT13 sedia ada
+Kod ini:
+- Kekalkan localStorage lama
+- Hantar markah KT13 ke Firestore
+- Rekod percubaan dan bahagian A/B/C
+- Dengarkan pengesahan rasmi secara masa nyata
+- Paparkan nama Pegawai Penilai dan tarikh pengesahan
