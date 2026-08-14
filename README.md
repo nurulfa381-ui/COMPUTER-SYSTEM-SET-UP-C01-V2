@@ -60,6 +60,8 @@ ABM interaktif untuk unit **IT-020-3:2013-C01 COMPUTER SYSTEM SET-UP**.
 - Logo hard update v15: `index.html` kini memanggil `app-logo-fix-v15.js` dan `style-logo-fix-v15.css`.
 - Logo text fix v16: teks fallback `LOGO KOLEJ` disembunyikan supaya hanya imej logo rasmi dipaparkan.
 - Logo text hard update v16: `index.html` kini memanggil `app-logo-text-fix-v16.js` dan `style-logo-text-fix-v16.css`.
+- KP09 v17: Pemasangan Driver dinaik taraf dengan nota lengkap, simulasi Device Manager, animasi driver, peta urutan, senario ralat, aktiviti pelajar, mini game dan KT09 10 soalan khusus.
+- KP09 hard update v17: `index.html` kini memanggil `app-kp09-v17.js` dan `style-kp09-v17.css`.
 
 ## Fail
 
