@@ -56,6 +56,10 @@ ABM interaktif untuk unit **IT-020-3:2013-C01 COMPUTER SYSTEM SET-UP**.
 - Teacher/Amali v14: Dashboard Guru ditambah dengan paparan KT rasmi yang berasingan daripada KK/Amali.
 - KK04, KK05 dan KK06 kini direkod sebagai simulasi amali berasingan: pemilihan tools, fungsi komponen dan urutan pemasangan komponen.
 - Teacher/Amali hard update v14: `index.html` kini memanggil `app-teacher-amali-v14.js` dan `style-teacher-amali-v14.css`.
+- Logo fix v15: path utama logo kolej dikemaskini kepada `assets/image/logo-kolej.png` supaya selari dengan folder image yang digunakan di repo main.
+- Logo hard update v15: `index.html` kini memanggil `app-logo-fix-v15.js` dan `style-logo-fix-v15.css`.
+- Logo text fix v16: teks fallback `LOGO KOLEJ` disembunyikan supaya hanya imej logo rasmi dipaparkan.
+- Logo text hard update v16: `index.html` kini memanggil `app-logo-text-fix-v16.js` dan `style-logo-text-fix-v16.css`.
 
 ## Fail
 
